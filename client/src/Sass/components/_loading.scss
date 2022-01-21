@@ -1,0 +1,34 @@
+#Squares {
+  fill: $primaryBlue;
+  stroke: $primaryBlue;
+}
+
+#square1 {
+  @include loading(square1);
+}
+#square2 {
+  @include loading(square2);
+}
+#square3 {
+  @include loading(square3);
+}
+#square4 {
+  @include loading(square4);
+}
+
+.svg-container {
+  align-self: center;
+  width: 15%;
+}
+
+.loading-text {
+  font-weight: 600;
+  font-size: em(24);
+  z-index: 0;
+}
+
+.loading-logo {
+  width: 100%;
+  height: auto;
+  animation: 1s linear 1s infinite spin;
+}

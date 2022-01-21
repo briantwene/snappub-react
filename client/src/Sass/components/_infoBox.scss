@@ -1,0 +1,90 @@
+.box-info {
+  color: white;
+  background-color: rgb(39, 39, 39);
+  grid-column: 4/5;
+  grid-row: 1/4;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  .close {
+    font-size: em(18);
+    align-self: flex-end;
+    padding: 0.4em 0.8em;
+    border: none;
+    background-color: $redBtn;
+    color: white;
+    border-radius: 0px 0px 0px 10px;
+  }
+}
+
+.img-title {
+  height: 20%;
+  padding-left: 1em;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+
+  .name {
+    font-size: em(18);
+    font-weight: 800;
+  }
+
+  .author {
+    font-size: em(18);
+  }
+}
+
+// .download {
+//   height: 80%;
+//   overflow: auto;
+//   border-top: solid 1px rgb(107, 107, 107);
+//   border-bottom: solid 1px rgb(121, 121, 121);
+//   margin: 1em;
+//   @include scrollbars(0.5em, #195f9f, grey);
+//   span {
+//     display: block;
+//   }
+//   .download-title {
+//     font-size: em(24);
+//     font-weight: 500;
+//   }
+
+//   .download-form {
+//     margin-top: 1em;
+//   }
+
+//   .aspect {
+//     font-size: em(20);
+//     display: block;
+//   }
+
+//   .aspect-container {
+//     display: flex;
+//     flex-wrap: wrap;
+//     justify-content: flex-start;
+//   }
+
+//   .res {
+//     margin: 1em;
+//   }
+
+//   input {
+//     margin-right: 1em;
+//   }
+// }
+
+.set-as {
+  height: 10%;
+  display: flex;
+  justify-content: space-evenly;
+
+  .set {
+    font-size: em(16);
+    padding: 0.5em 2em;
+    background-color: $primaryBlue;
+    color: white;
+    border: none;
+    border-radius: 10px;
+  }
+}

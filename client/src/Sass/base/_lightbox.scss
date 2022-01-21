@@ -1,0 +1,21 @@
+.lightbox-container {
+  background-color: rgba(0, 0, 0, 0.644);
+  display: flex;
+  height: 100%;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  z-index: 1;
+
+  .lightbox {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    height: 90%;
+    width: 100%;
+    background-color: black;
+  }
+}

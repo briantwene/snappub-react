@@ -1,0 +1,14 @@
+.footerRight {
+  text-align: center;
+  align-self: center;
+  font-size: em(24);
+  a {
+    color: white;
+    text-decoration: none;
+  }
+
+  a,
+  svg {
+    vertical-align: middle;
+  }
+}

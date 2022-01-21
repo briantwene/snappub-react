@@ -1,0 +1,45 @@
+.header {
+  background: $primaryBlue;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .logo {
+    width: 50%;
+    font-size: em(36);
+    font-weight: 800;
+
+    .snap-logo {
+      margin: 1em;
+    }
+  }
+
+  .logo-buttons {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    width: 100%;
+    justify-content: space-around;
+  }
+
+  .download-app {
+    display: none;
+    background-color: rgb(2, 175, 2);
+    color: white;
+    border: none;
+  }
+
+  .settings {
+    display: none;
+    background-color: rgba(197, 27, 27, 0);
+    color: white;
+    grid-column: 2/3;
+  }
+}
+
+.settings:hover {
+  color: rgb(233, 233, 233);
+  svg {
+    animation: spin 1s ease-in-out;
+  }
+}

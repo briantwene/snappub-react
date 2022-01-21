@@ -1,0 +1,15 @@
+.footer {
+  background: $FooterColour;
+  color: white;
+  display: flex;
+  padding: 1em;
+
+  .footer-section {
+    width: 100%;
+  }
+
+  svg {
+    font-size: em(24);
+    vertical-align: middle;
+  }
+}

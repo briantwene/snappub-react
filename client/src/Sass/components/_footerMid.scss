@@ -1,0 +1,24 @@
+.footerMid {
+  font-size: em(24);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  a {
+    text-decoration: none;
+    color: white;
+  }
+  .backtop {
+    font-size: em(16);
+    border: none;
+    background-color: $dullFooter;
+    border-radius: 15px;
+    padding: 0.5em 1em;
+  }
+  .social {
+    span,
+    svg {
+      vertical-align: middle;
+    }
+  }
+}
