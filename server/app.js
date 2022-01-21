@@ -4,7 +4,7 @@ const app = express();
 const api = require("./routes/api.js");
 const download = require("./routes/download.js");
 const path = require("path");
-const port = process.env.port || 3001;
+const port = process.env.PORT || 3001;
 
 //set up routes for fetching images for the frontend
 // app.use(express.urlencoded({ extended: "false" }));
