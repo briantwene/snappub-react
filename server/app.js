@@ -1,7 +1,6 @@
 //import modules and routes
 const express = require("express");
 const app = express();
-const dotenv = require("dotenv").config();
 const api = require("./routes/api.js");
 const download = require("./routes/download.js");
 const path = require("path");
