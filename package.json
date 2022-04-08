@@ -21,6 +21,6 @@
   },
   "homepage": "https://github.com/bt521/snappub-react#readme",
   "engines": {
-    "node": "v14.18.1"
+    "node": "v16.14.2"
   }
 }
