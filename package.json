@@ -1,28 +1,25 @@
 {
-  "name": "server",
+  "name": "snappub-react",
   "version": "1.0.0",
-  "description": "",
+  "description": "online reddit wallpaper site more description coming soon....",
   "main": "index.js",
+  "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon app.js",
     "start": "node server/app.js",
     "build": "cd client && npm install && npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bt521/snappub-react.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "dependencies": {
-    "axios": "^0.24.0",
-    "express": "^4.17.2",
-    "probe-image-size": "^7.2.2",
-    "snoowrap": "^1.23.0"
+  "bugs": {
+    "url": "https://github.com/bt521/snappub-react/issues"
   },
-  "devDependencies": {
-    "dotenv": "^10.0.0",
-    "eslint": "^8.6.0",
-    "nodemon": "^2.0.15"
-  },
+  "homepage": "https://github.com/bt521/snappub-react#readme",
   "engines": {
     "node": "v14.18.1"
   }
