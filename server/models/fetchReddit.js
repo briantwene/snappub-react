@@ -1,6 +1,7 @@
 "use strict";
 //import snoowarp reddit api wrapper
 const snoowrap = require("snoowrap");
+require("dotenv").config();
 
 //enter credentials to setup api
 const reddit_api = new snoowrap({
