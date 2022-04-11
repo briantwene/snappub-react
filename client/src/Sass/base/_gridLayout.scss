@@ -1,0 +1,45 @@
+//div that contains react app
+#root {
+  height: 100%;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 10% auto 20%;
+}
+
+.content {
+  grid-column: 1/2;
+  grid-row: 2/3;
+  display: grid;
+  place-items: center;
+}
+
+.header {
+  grid-column: 1/2;
+  grid-row: 1/2;
+}
+
+// .filter_container {
+//   grid-column: 4/10;
+//   grid-row: 2/3;
+// }
+
+.photo_grid {
+  grid-column: 1/2;
+  grid-row: 3/4;
+  justify-self: center;
+  margin: 1em;
+}
+
+.loading-container {
+  grid-column: 1/13;
+  grid-row: 2/4;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.footer {
+  grid-column: 1/2;
+  grid-row: 3/4;
+}
