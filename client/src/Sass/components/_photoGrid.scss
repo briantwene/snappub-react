@@ -1,18 +1,24 @@
 .photo_grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 20px;
-  width: 90%;
+  display: flex;
+  flex-wrap: wrap;
+  width: 95%;
+  gap: 10px;
+  &:after {
+    content: "";
+    display: block;
+    flex-grow: 10;
+  }
 }
 
 .grid {
-  aspect-ratio: 16/9 auto;
+  aspect-ratio: auto;
+  height: 40vh;
+  flex-grow: 2;
 
   img {
-    border-radius: 5px;
-    box-shadow: 5px 5px 5px rgba($color: #000000, $alpha: 0.5);
-    &:hover {
-      box-shadow: none;
-    }
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    vertical-align: bottom;
   }
 }
