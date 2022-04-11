@@ -1,10 +1,11 @@
+require("dotenv").config();
 //import modules and routes
 const express = require("express");
 const app = express();
 const api = require("./routes/api.js");
 const download = require("./routes/download.js");
 const path = require("path");
-require("dotenv").config();
+
 const port = process.env.PORT || 3001;
 
 //set up routes for fetching images for the frontend
