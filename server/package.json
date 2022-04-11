@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node -r dotenv/config app.js",
     "dev": "nodemon app.js"
   },
   "keywords": [],
@@ -21,5 +22,4 @@
     "eslint": "^8.6.0",
     "nodemon": "^2.0.15"
   }
-  
 }
