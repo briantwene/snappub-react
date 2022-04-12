@@ -1,36 +1,31 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import fileDownload from "js-file-download";
 import "../Css/App.css";
-import Header from "../components/Header";
-import Filter from "../components/Filter";
-import PhotoGrid from "../components/PhotoGrid";
-import Footer from "../components/Footer";
-import Lightbox from "../components/lightbox";
-import Loading from "../components/loading";
+
+import InfiniteScroll from "react-infinite-scroll-component";
 
 function Home() {
   //declaring state for the APP
-  const [pics, updatePics] = useState(0);
+  const [pics, updatePics] = useState([]);
+  const [loaded, setIsLoaded] = useState(false);
 
-  useEffect(() => {
+  const fetchImages = () => {
     axios
       .get("/api/images")
-      .then(({ data }) =>
-        updatePics({
-          images: data,
-          popupImage: "",
-          popupAuthor: "",
-          popupImageTitle: "",
-          popupOriginRes: null,
-          rating: null,
-          showLightbox: false
-        })
-      )
-      .catch((e) => console.log("there was error"));
+      .then(({ data }) => {
+        updatePics(data);
+        setIsLoaded(true);
+      })
+      .catch((e) => console.log("there was error", e));
+  };
+
+  useEffect(() => {
+    fetchImages();
   }, []);
   console.log(pics);
 
+  //will go to the view page
   const downloadRequest = (url, title) => {
     axios
       .get("/download/image", {
@@ -43,43 +38,26 @@ function Home() {
       });
   };
 
-  const handleLightbox = (url, author, title, originRes, rating) => {
-    //wouldnt let me just inverse the booleanm
-    //so had to destructure the property and the object itself
-    updatePics(({ showLightbox, ...previousState }) => {
-      return {
-        ...previousState,
-        popupImage: url,
-        popupAuthor: author,
-        popupImageTitle: title,
-        popupOriginRes: originRes,
-        rating: rating,
-        showLightbox: !showLightbox
-      };
-    });
+  //function for creating images
+  const renderedImages = () => {
+    return pics.map((image, key) => (
+      <div className="grid" key={key}>
+        <img
+          src={image.pic}
+          key={key}
+          author={image.author}
+          alt=""
+          loading="lazy"
+        />
+      </div>
+    ));
   };
 
   return (
     <>
-      {/* <Filter /> */}
-      {pics ? (
-        <PhotoGrid images={pics.images} open={handleLightbox} />
-      ) : (
-        <Loading />
-      )}
-      {pics.showLightbox ? (
-        <div className="lightbox-container">
-          <Lightbox
-            popupImage={pics.popupImage}
-            popupAuthor={pics.popupAuthor}
-            popupTitle={pics.popupImageTitle}
-            originRes={pics.popupOriginRes}
-            rating={pics.rating}
-            closePopup={handleLightbox}
-            download={downloadRequest}
-          />
-        </div>
-      ) : null}
+      <InfiniteScroll dataLength={pics.length} hasMore={false}>
+        <div className="photo_grid">{pics ? renderedImages() : ""}</div>;
+      </InfiniteScroll>
     </>
   );
 }

@@ -273,7 +273,7 @@ img {
 .photo_grid {
   display: flex;
   flex-wrap: wrap;
-  width: 95%;
+  width: 100%;
   gap: 10px;
 }
 .photo_grid:after {
