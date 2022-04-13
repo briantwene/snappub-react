@@ -2,8 +2,9 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import fileDownload from "js-file-download";
 import "../Css/App.css";
-
+import { ReactComponent as Logo } from "../components/loading.svg";
 import InfiniteScroll from "react-infinite-scroll-component";
+import Filter from "../components/Filter";
 
 function Home() {
   //declaring state for the APP
@@ -49,14 +50,23 @@ function Home() {
           alt=""
           loading="lazy"
         />
+        <div className="resolution">
+          {`${image.originRes.height}`} &#10005; {`${image.originRes.width}`}
+        </div>
       </div>
     ));
   };
 
   return (
     <>
-      <InfiniteScroll dataLength={pics.length} hasMore={false}>
-        <div className="photo_grid">{pics ? renderedImages() : ""}</div>;
+      <Filter />
+      <InfiniteScroll
+        style={{ display: "flex", alignItems: "center" }}
+        dataLength={pics.length}
+        hasMore={false}
+        loader={<Logo />}
+      >
+        <div className="photo_grid">{pics ? renderedImages() : ""}</div>
       </InfiniteScroll>
     </>
   );

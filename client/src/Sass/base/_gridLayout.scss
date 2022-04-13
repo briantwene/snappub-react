@@ -3,14 +3,14 @@
   height: 100%;
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: 10% auto 20%;
+  grid-template-rows: 15% auto 20%;
 }
 
 .content {
   grid-column: 1/2;
   grid-row: 2/3;
-  display: grid;
-  place-items: center;
+  display: flex;
+  flex-direction: column;
 }
 
 .header {
@@ -18,10 +18,10 @@
   grid-row: 1/2;
 }
 
-// .filter_container {
-//   grid-column: 4/10;
-//   grid-row: 2/3;
-// }
+.filter_container {
+  margin: 1em;
+  width: 100%;
+}
 
 .photo_grid {
   grid-column: 1/2;
@@ -41,5 +41,5 @@
 
 .footer {
   grid-column: 1/2;
-  grid-row: 3/4;
+  grid-row: 4/5;
 }

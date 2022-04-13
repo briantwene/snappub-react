@@ -1,17 +1,24 @@
 .header {
-  background: $primaryBlue;
-  color: white;
+  //background: $primaryBlue;
+  //color: white;
   display: flex;
   justify-content: space-between;
   align-items: center;
 
   .logo {
     width: 50%;
-    font-size: em(36);
+    font-size: em(54);
     font-weight: 800;
 
     .snap-logo {
       margin: 1em;
+      background-image: linear-gradient(
+        270deg,
+        rgba(8, 56, 212, 1) 0%,
+        rgba(44, 215, 185, 1) 100%
+      );
+      background-clip: text;
+      color: transparent;
     }
   }
 

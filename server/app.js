@@ -1,3 +1,4 @@
+require("dotenv").config();
 //import modules and routes
 const express = require("express");
 const app = express();
