@@ -1,104 +1,105 @@
-"use strict";
+'use strict';
 //import modules and functions needed
-const image_probe = require("probe-image-size");
-const { fetchData } = require("../models/fetchReddit");
-const skipKeywords = ["gallery", "imgur.com/a/"];
+const image_probe = require('probe-image-size');
+const { fetchData } = require('../models/fetchReddit');
+const { getFileSize } = require('./getFileSize');
+const skipKeywords = ['gallery', 'imgur.com/a/'];
 const reso = [
   {
     width: 2560,
     height: 1080,
-    aspect: "21:9"
+    aspect: '21:9',
   },
   {
     width: 3440,
     height: 1440,
-    aspect: "21:9"
+    aspect: '21:9',
   },
   {
     width: 5120,
     height: 2160,
-    aspect: "21:9"
+    aspect: '21:9',
   },
   {
     width: 1280,
     height: 720,
-    aspect: "16:9"
+    aspect: '16:9',
   },
   {
     width: 1366,
     height: 768,
-    aspect: "16:9"
+    aspect: '16:9',
   },
   {
     width: 1600,
     height: 900,
-    aspect: "16:9"
+    aspect: '16:9',
   },
   {
     width: 1920,
     height: 1080,
-    aspect: "16:9"
+    aspect: '16:9',
   },
   {
     width: 2560,
     height: 1440,
-    aspect: "16:9"
+    aspect: '16:9',
   },
   {
     width: 3840,
     height: 2160,
-    aspect: "16:9"
+    aspect: '16:9',
   },
   {
     width: 5120,
     height: 2880,
-    aspect: "16:9"
+    aspect: '16:9',
   },
   {
     width: 7680,
     height: 4320,
-    aspect: "16:9"
+    aspect: '16:9',
   },
   {
     width: 1280,
     height: 800,
-    aspect: "16:10"
+    aspect: '16:10',
   },
   {
     width: 1920,
     height: 1200,
-    aspect: "16:10"
+    aspect: '16:10',
   },
   {
     width: 2560,
     height: 1080,
-    aspect: "16:10"
+    aspect: '16:10',
   },
   {
     width: 1400,
     height: 1050,
-    aspect: "4:3"
+    aspect: '4:3',
   },
   {
     width: 1440,
     height: 1080,
-    aspect: "4:3"
+    aspect: '4:3',
   },
   {
     width: 1600,
     height: 1200,
-    aspect: "4:3"
+    aspect: '4:3',
   },
   {
     width: 1920,
     height: 1440,
-    aspect: "4:3"
+    aspect: '4:3',
   },
   {
     width: 2048,
     height: 1536,
-    aspect: "4:3"
-  }
+    aspect: '4:3',
+  },
 ];
 
 //function for getting the data out of each submisson
@@ -110,13 +111,15 @@ const extractor = (image) => {
       pic: image.url,
       title: image.title,
       rating: image.score,
+      created_at: image.created_utc,
+      size: await getFileSize(image.url),
       originRes: await image_probe(image.url)
         .then(({ width, height }) => {
           return { width: width, height: height };
         })
         .catch((e) => {
           `some error: ${e}`;
-        })
+        }),
     });
   });
 };
@@ -140,7 +143,7 @@ const extractImages = async (postData) => {
   //when resoved it will return an object
   //with the information needed for each image post
   const extractedImages = await Promise.all(promises);
-  console.log(extractedImages);
+
   //retrun this array to the calling function
   return extractedImages;
 };
@@ -151,7 +154,7 @@ exports.getImageData = async () => {
   const imageData = await fetchData()
     .then((result) => extractImages(result))
     .catch((e) => {
-      console.log("something went wrong in getting extracting the images", e);
+      console.log('something went wrong in getting extracting the images', e);
     });
   console.log(imageData);
   //retrun this to then calling function

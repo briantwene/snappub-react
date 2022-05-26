@@ -7,9 +7,9 @@ import Button from "./Button";
 function Filter() {
   return (
     <div className="filter_container">
-      <button className="filter-btn">Hot</button>
-      <button className="filter-btn">New</button>
-      <button className="filter-btn">Top</button>
+      <button className="filter-btn hot">Hot</button>
+      <button className="filter-btn new">New</button>
+      <button className="filter-btn top">Top</button>
     </div>
   );
 }

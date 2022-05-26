@@ -1,45 +1,39 @@
 //div that contains react app
-#root {
-  height: 100%;
-  display: grid;
+// #root {
+//   height: 100%;
+// }
+
+.page-body {
+  height: 92.5vh;
+  // display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: 15% auto 20%;
+  overflow: auto;
+  // grid-template-rows: auto min-content;
+  // grid-template-areas:
+  //   "content"
+  //   "footer";
 }
 
 .content {
-  grid-column: 1/2;
-  grid-row: 2/3;
+  grid-area: content;
   display: flex;
   flex-direction: column;
-}
-
-.header {
-  grid-column: 1/2;
-  grid-row: 1/2;
-}
-
-.filter_container {
-  margin: 1em;
-  width: 100%;
-}
-
-.photo_grid {
-  grid-column: 1/2;
-  grid-row: 3/4;
-  justify-self: center;
-  margin: 1em;
-}
-
-.loading-container {
-  grid-column: 1/13;
-  grid-row: 2/4;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
   align-items: center;
 }
 
-.footer {
-  grid-column: 1/2;
-  grid-row: 4/5;
+.photo_grid {
+  margin: 1em;
 }
+
+.footer {
+  grid-area: footer;
+}
+
+// .loading-container {
+//   grid-column: 1/13;
+//   grid-row: 2/4;
+//   display: flex;
+//   flex-direction: column;
+//   justify-content: center;
+//   align-items: center;
+// }

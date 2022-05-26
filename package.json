@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "description": "online reddit wallpaper site more description coming soon....",
   "main": "index.js",
-  "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "cd server && npm start",
@@ -22,5 +21,8 @@
   "homepage": "https://github.com/bt521/snappub-react#readme",
   "engines": {
     "node": "v16.14.2"
+  },
+  "dependencies": {
+    "react-custom-properties": "^1.2.0"
   }
 }

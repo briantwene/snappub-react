@@ -1,15 +1,18 @@
 .btn {
   font: {
-    size: em(24);
+    size: em(20);
   }
 
   padding: 0.5em 1em;
   margin: 0em 2em;
   border: none;
   border-radius: 15px;
+  //for links
+  text-decoration: none;
 
   span,
   svg {
     vertical-align: middle;
+    margin: 0em 0.1em;
   }
 }

@@ -9,6 +9,7 @@ function FooterMid() {
     <div className="footerMid footer-section">
       <div className="top">
         <button className="backtop">
+          {/* remember to make this react-router-dom friendly */}
           <a href="#">Back-to-Top</a>
         </button>
       </div>

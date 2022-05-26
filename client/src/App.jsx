@@ -9,20 +9,23 @@ import View from "./pages/View";
 import Settings from "./pages/Settings";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
+import Download from "./pages/Download";
 
 function App() {
   return (
     <>
       <Header />
-      <div className="content">
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/view" element={<View />} />
-          <Route path="/settings" element={<Settings />} />
-        </Routes>
+      <div className="page-body">
+        <div className="content">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/view" element={<View />} />
+            <Route path="/settings" element={<Settings />} />
+            <Route path="/download" element={<Download />} />
+          </Routes>
+        </div>
+        <Footer />
       </div>
-
-      <Footer />
     </>
   );
 }

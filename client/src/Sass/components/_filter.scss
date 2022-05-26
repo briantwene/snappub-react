@@ -1,25 +1,40 @@
 .filter_container {
+  width: 100%;
   display: flex;
   justify-content: center;
+  align-content: center;
+  flex-direction: row;
   align-self: center;
+  height: 20vh;
+}
 
-  .filter-btn {
-    font-size: em(24);
-    font-weight: 300;
-    padding: 0.5em 2em;
-    margin: 0em 4em;
-    border: none;
-    background-color: transparent;
-    transition: all 0.2s;
-    border-radius: 15px;
+.filter-btn {
+  font-size: em(24);
 
-    &:hover {
-      background: linear-gradient(
-        151deg,
-        rgba(8, 56, 212, 1) 0%,
-        rgba(44, 215, 185, 1) 100%
-      );
-      color: white;
-    }
+  font-weight: 300;
+  padding: 0.5em 2em;
+  margin: auto 4em;
+  border: none;
+  //background-color: transparent;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease 0s;
+  border-radius: 15px;
+
+  &:hover {
+    transform: translateY(-7px);
+    color: white;
   }
+}
+
+.hot:hover {
+  background: linear-gradient(45deg, rgb(0, 248, 136), rgb(0, 255, 208));
+  box-shadow: 0px 15px 20px rgba(44, 215, 185, 1);
+}
+.new:hover {
+  background: linear-gradient(45deg, rgb(0, 199, 254), rgb(131, 58, 180));
+  box-shadow: 0px 15px 20px rgb(131, 58, 180);
+}
+.top:hover {
+  background: linear-gradient(45deg, rgb(253, 29, 29), rgb(252, 176, 69));
+  box-shadow: 0px 15px 20px rgb(252, 176, 69);
 }
