@@ -1,44 +1,50 @@
 .header {
-  background: $primaryBlue;
-  color: white;
+  //background: $primaryBlue;
+  //color: white;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  background-color: white;
+  height: 7.5vh;
+  width: 100%;
+  padding: 1em 0em;
 
+  border-bottom: 0.063em rgb(227, 227, 227) solid;
   .logo {
     width: 50%;
-    font-size: em(36);
+    font-size: em(32);
     font-weight: 800;
 
     .snap-logo {
       margin: 1em;
+      background-image: linear-gradient(
+        45deg,
+        rgb(0, 248, 136),
+        rgb(0, 255, 208),
+        rgb(0, 199, 254),
+        rgb(131, 58, 180),
+        rgb(253, 29, 29),
+        rgb(252, 176, 69)
+      );
+      background-size: 400%;
+      background-clip: text;
+      color: transparent;
+      animation: bg-animation 25s ease-in-out infinite;
     }
   }
 
-  .logo-buttons {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    width: 100%;
-    justify-content: space-around;
+  .navlink {
+    color: black;
   }
 
   .download-app {
-    display: none;
-    background-color: rgb(2, 175, 2);
-    color: white;
-    border: none;
   }
 
   .settings {
-    display: none;
-    background-color: rgba(197, 27, 27, 0);
-    color: white;
-    grid-column: 2/3;
   }
 }
 
 .settings:hover {
-  color: rgb(233, 233, 233);
   svg {
     animation: spin 1s ease-in-out;
   }
