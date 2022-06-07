@@ -11,14 +11,14 @@ const port = process.env.PORT || 3001;
 
 //set up routes for fetching images for the frontend
 // app.use(express.urlencoded({ extended: "false" }));
-app.use(express.static(path.resolve(__dirname, '../client/build')));
+// app.use(express.static(path.resolve(__dirname, '../client/build')));
 app.use('/api', api);
 app.use('/download', download);
 app.use('/info', info);
 
-app.get('*', (req, res) => {
-  res.sendFile(path.resolve(__dirname, '../client/build', 'index.html'));
-});
+// app.get('*', (req, res) => {
+//   res.sendFile(path.resolve(__dirname, '../client/build', 'index.html'));
+// });
 
 //set the server to listen on the following port
 app.listen(port, (err) => {

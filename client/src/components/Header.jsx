@@ -1,11 +1,11 @@
 // #Filename: Header.jsx
 // #Author: Brian Twene (@bt521)
 // #Date:12/12/21
-import React from "react";
-import Button from "./Button";
+import React from 'react';
+import Button from './Button';
 
-import * as RiIcons from "react-icons/ri";
-import { Link } from "react-router-dom";
+import * as RiIcons from 'react-icons/ri';
+import { Link } from 'react-router-dom';
 
 function Header() {
   return (

@@ -112,7 +112,7 @@ const extractor = (image) => {
       title: image.title,
       rating: image.score,
       created_at: image.created_utc,
-      size: await getFileSize(image.url),
+      size: '2MB',
       originRes: await image_probe(image.url)
         .then(({ width, height }) => {
           return { width: width, height: height };
@@ -129,9 +129,10 @@ const extractImages = async (postData) => {
   // array for keeping the list of promises
   const promises = [];
   //loop through the array of post objects
-  for (const image of postData) {
+  for (const post of postData) {
     // check for if the image links have the keywords in the array
     //if it does then skip to the next submission
+    const image = post.data;
     if (!skipKeywords.some((word) => image.url.includes(word))) {
       //put the promises returned in to the array called promieses
       promises.push(extractor(image));
@@ -149,14 +150,20 @@ const extractImages = async (postData) => {
 };
 
 //method for getting the data from the images
-exports.getImageData = async () => {
+exports.getImageData = async (page, subreddit) => {
   //await the helper functions for the extracted data
-  const imageData = await fetchData()
-    .then((result) => extractImages(result))
+  const imageData = await fetchData(page, subreddit)
+    .then(async (result) => {
+      const postData = result.data.children;
+      return {
+        next: result.data.after,
+        prev: result.data.before,
+        data: await extractImages(postData),
+      };
+    })
     .catch((e) => {
       console.log('something went wrong in getting extracting the images', e);
     });
-  console.log(imageData);
   //retrun this to then calling function
   return imageData;
 };

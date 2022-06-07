@@ -2,6 +2,8 @@
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
+  margin: 1em;
+  //height: 100%;
 
   div:last-child {
     flex-grow: 10;
@@ -11,8 +13,6 @@
 .gallery-title-overlay {
   position: relative;
   background: black;
-  height: 85vh;
-
   overflow: hidden;
 
   img {
@@ -47,6 +47,25 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+
+.pagination-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 20%;
+  font-size: em(24);
+  margin: 1em;
+
+  .pagination-btn {
+    font-size: em(50);
+    text-align: center;
+    display: flex;
+    border: none;
+    background-color: rgb(0, 145, 255);
+    color: white;
+    border-radius: 10px;
+  }
 }
 
 .react-aspect-ratio-placeholder {

@@ -3,6 +3,20 @@ import { useLocation } from 'react-router-dom';
 import * as RiIcons from 'react-icons/ri';
 import axios from 'axios';
 import numeral from 'numeral';
+import fileDownload from 'js-file-download';
+
+//will go to the view page
+const downloadRequest = (url, title) => {
+  axios
+    .get('/download/image', {
+      params: { url: url, title: title },
+      responseType: 'blob',
+    })
+    .then(({ data, headers }) => {
+      console.log(data);
+      fileDownload(data, headers.imgfilename);
+    });
+};
 
 function View() {
   const location = useLocation();

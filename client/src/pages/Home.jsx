@@ -1,67 +1,55 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import fileDownload from 'js-file-download';
+
 import '../Css/App.css';
 import { ReactComponent as Logo } from '../components/loading.svg';
-import InfiniteScroll from 'react-infinite-scroll-component';
 import Filter from '../components/Filter';
 import { Link } from 'react-router-dom';
 import ImageRenderer from '../components/ImageRenderer';
 import PhotoGrid from '../components/PhotoGrid';
+import { useQuery } from 'react-query';
+import * as RiIcons from 'react-icons/ri';
 
 function Home() {
-  //declaring state for the APP
-  const [pics, updatePics] = useState([]);
-  const [loaded, setIsLoaded] = useState(false);
+  //declare page state variable
+  const [page, setPage] = useState(0);
+  const [pageMap, setPageMap] = useState(new Map([[0, null]]));
 
-  const fetchImages = () => {
-    axios
-      .get('/api/images')
+  const lastPage = () => {
+    if (page !== 0 && pageMap[page] === null) return true;
+    return false;
+  };
+  const modMap = (value) => {
+    //then add the next value
+    if (!pageMap.has(page + 1))
+      setPageMap((prevMap) => prevMap.set(page + 1, value));
+  };
+  const { isLoading, isError, data, error, isPreviousData, isFetching } =
+    useQuery(
+      ['pictures', pageMap.get(page)],
+      () => fetchImages(pageMap.get(page)),
+      {
+        keepPreviousData: true,
+      }
+    );
+
+  async function fetchImages(page = null) {
+    return await axios
+      .get(`/api/images`, { params: { page: page, subreddit: 'wallpaper' } })
       .then(({ data }) => {
-        updatePics(data);
-        setIsLoaded(true);
+        modMap(data.next);
+        return data.data;
       })
       .catch((e) => console.log('there was error', e));
-  };
+  }
 
-  useEffect(() => {
-    fetchImages();
-  }, []);
-  console.log(pics);
+  if (isLoading) {
+    return <span>Loading....</span>;
+  }
 
-  //will go to the view page
-  const downloadRequest = (url, title) => {
-    axios
-      .get('/download/image', {
-        params: { url: url, title: title },
-        responseType: 'blob',
-      })
-      .then(({ data, headers }) => {
-        console.log(data);
-        fileDownload(data, headers.imgfilename);
-      });
-  };
-
-  //function for creating images
-  const renderedImages = () => {
-    return pics.map((image, key) => (
-      <PhotoGrid image={image} key={key} />
-      // <div className="grid" key={key}>
-      //   <Link to="/view" state={{ data: image }}>
-      //     <img
-      //       src={image.pic}
-      //       key={key}
-      //       author={image.author}
-      //       alt=""
-      //       loading="lazy"
-      //     />
-      //     <div className="resolution">
-      //       {`${image.originRes.height}`} &#10005; {`${image.originRes.width}`}
-      //     </div>
-      //   </Link>
-      // </div>
-    ));
-  };
+  if (isError) {
+    return <span>{error.message}</span>;
+  }
 
   return (
     <>
@@ -72,11 +60,31 @@ function Home() {
         </section>
       </div>
       {/* <Filter /> */}
-
       <div className="photo_grid">
-        {pics &&
-          pics.map((image, key) => <ImageRenderer image={image} key={key} />)}
+        {isLoading || isFetching
+          ? 'LOADING....'
+          : isError
+          ? `Error: ${error.message}`
+          : data.map((image, key) => <ImageRenderer image={image} key={key} />)}
+
         <div></div>
+      </div>
+      <div className="pagination-container">
+        <button
+          className="pagination-btn"
+          onClick={() => setPage((old) => Math.max(old - 1, 0))}
+          disabled={page === 0}
+        >
+          <RiIcons.RiArrowDropLeftLine />
+        </button>
+        <span>{page + 1}</span>
+        <button
+          className="pagination-btn"
+          onClick={() => setPage((old) => old + 1)}
+          disabled={lastPage()}
+        >
+          <RiIcons.RiArrowDropRightLine />
+        </button>
       </div>
     </>
   );

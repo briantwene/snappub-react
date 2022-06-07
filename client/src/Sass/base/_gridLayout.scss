@@ -8,6 +8,9 @@
   // display: grid;
   grid-template-columns: 1fr;
   overflow: auto;
+  display: flex;
+  flex-direction: column;
+
   // grid-template-rows: auto min-content;
   // grid-template-areas:
   //   "content"
@@ -19,10 +22,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-}
-
-.photo_grid {
-  margin: 1em;
+  //height: 100%;
 }
 
 .footer {
