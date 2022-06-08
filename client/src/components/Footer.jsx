@@ -11,7 +11,6 @@ function Footer() {
     <div className="footer">
       <FooterLeft />
       <FooterMid />
-      <FooterRight />
     </div>
   );
 }

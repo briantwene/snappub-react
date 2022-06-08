@@ -2,6 +2,7 @@
 //import modules and functions needed
 const image_probe = require('probe-image-size');
 const { fetchData } = require('../models/fetchReddit');
+const { fetchInfo } = require('./fetchInfo');
 const { getFileSize } = require('./getFileSize');
 const skipKeywords = ['gallery', 'imgur.com/a/'];
 const reso = [
@@ -106,8 +107,10 @@ const reso = [
 const extractor = (image) => {
   //return a promise that gets the data out of the submission on resolving
   return new Promise(async (resolve) => {
+    console.log(image.author);
     resolve({
-      author: image.author.name,
+      author: image.author,
+      avatar: await fetchInfo(image.author, 'avatar'),
       pic: image.url,
       title: image.title,
       rating: image.score,

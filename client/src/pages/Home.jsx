@@ -43,6 +43,7 @@ function Home() {
       .catch((e) => console.log('there was error', e));
   }
 
+  console.log(data);
   if (isLoading) {
     return <span>Loading....</span>;
   }
@@ -54,10 +55,7 @@ function Home() {
   return (
     <>
       <div className="gallery-title-overlay">
-        <img src="/pietro-de-grandi-T7K4aEPoGGk-unsplash.jpeg" alt="" />
-        <section className="gallery-title">
-          <div className="title">Wallpapers from Reddit</div>
-        </section>
+        <h1 className="title">r/Wallpaper</h1>
       </div>
       {/* <Filter /> */}
       <div className="photo_grid">

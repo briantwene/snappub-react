@@ -25,6 +25,12 @@
   }
 }
 
+@mixin desktop() {
+  @media (max-width: 600px) {
+    @content;
+  }
+}
+
 @mixin loading($name) {
   & {
     animation-name: $name;

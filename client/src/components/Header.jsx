@@ -13,7 +13,7 @@ function Header() {
       <div className="logo">
         <span className="snap-logo">Snap-Pub</span>
       </div>
-      <div className="logo-buttons">
+      {/* <div className="logo-buttons">
         <Link to="/download" className="btn navlink download-app">
           <RiIcons.RiDownload2Fill />
           <span>Download</span>
@@ -22,7 +22,7 @@ function Header() {
           <RiIcons.RiSettings5Fill />
           <span>Settings</span>
         </Link>
-      </div>
+      </div> */}
     </div>
   );
 }
