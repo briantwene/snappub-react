@@ -37,15 +37,62 @@
     color: black;
   }
 
-  .download-app {
-  }
+  .dropdown {
+    display: relative;
+    margin: 1em;
+    padding: 0.5em;
+    border-radius: 5px;
 
-  .settings {
-  }
-}
+    .dropdown-content {
+      display: none;
 
-.settings:hover {
-  svg {
-    animation: spin 1s ease-in-out;
+      &__show {
+        display: flex;
+        position: absolute;
+        background-color: white;
+        border: 1px solid rgb(183, 183, 183);
+        box-shadow: 0 8px 16px #00000029;
+        padding: 1em;
+        width: 15rem;
+        right: 1rem;
+        cursor: pointer;
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+        top: 4rem;
+        border-radius: 5px;
+        z-index: 99999;
+
+        li {
+          list-style: none;
+        }
+      }
+    }
+
+    &:hover {
+      background-color: rgb(245, 245, 245);
+    }
+
+    .current-subreddit {
+      border: none;
+      background-color: transparent;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      font-size: em(16);
+    }
+
+    .dropdown-icon {
+      display: flex;
+      align-items: center;
+      font-size: em(20);
+    }
+    img {
+      border-radius: 50%;
+      margin-right: 1em;
+      height: 32px;
+      width: 32px;
+    }
   }
 }
