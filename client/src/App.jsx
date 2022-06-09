@@ -12,18 +12,19 @@ import Footer from './components/Footer';
 import Download from './pages/Download';
 
 function App() {
+  //const [currentSub, setCurrentSub] = useState('');
   return (
     <>
       <Header />
       <div className="page-body">
-        <div className="content">
+        {/* <div className="content">
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/view" element={<View />} />
             <Route path="/settings" element={<Settings />} />
             <Route path="/download" element={<Download />} />
           </Routes>
-        </div>
+        </div> */}
         <Footer />
       </div>
     </>

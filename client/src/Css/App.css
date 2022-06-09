@@ -189,56 +189,20 @@ img {
   color: black;
 }
 .header .dropdown {
-  display: relative;
-  margin: 1em;
-  padding: 0.5em;
-  border-radius: 5px;
+  width: 20ch;
+  margin: 0em 1em;
 }
-.header .dropdown .dropdown-content {
-  display: none;
-}
-.header .dropdown .dropdown-content__show {
-  display: flex;
-  position: absolute;
-  background-color: white;
-  border: 1px solid rgb(183, 183, 183);
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1607843137);
-  padding: 1em;
-  width: 15rem;
-  right: 1rem;
-  cursor: pointer;
-  flex-direction: column;
-  align-items: center;
-  gap: 20px;
-  top: 4rem;
-  border-radius: 5px;
-  z-index: 99999;
-}
-.header .dropdown .dropdown-content__show li {
-  list-style: none;
-}
-.header .dropdown:hover {
-  background-color: rgb(245, 245, 245);
-}
-.header .dropdown .current-subreddit {
-  border: none;
-  background-color: transparent;
+.header .dropdown-label {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  width: 100%;
-  font-size: 1rem;
 }
-.header .dropdown .dropdown-icon {
-  display: flex;
-  align-items: center;
-  font-size: 1.25rem;
+.header .dropdown-label .dropdown-label-text {
+  margin-left: 1em;
 }
-.header .dropdown img {
-  border-radius: 50%;
-  margin-right: 1em;
+.header .subreddit-icon {
   height: 32px;
   width: 32px;
+  border-radius: 50%;
 }
 
 .footer {
