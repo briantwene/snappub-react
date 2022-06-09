@@ -7,25 +7,13 @@ import Button from './Button';
 import * as RiIcons from 'react-icons/ri';
 import { Link } from 'react-router-dom';
 import Select from 'react-select';
-
-const options = [
-  {
-    value: 'wallpaper',
-    label: 'wallpaper',
-    icon: (
-      <img
-        className="subreddit-icon"
-        src="https://a.thumbs.redditmedia.com/APweUko3qLJ0prsQI1giluMwBdcVnokw9_yZcby4SB8.png"
-        alt=""
-      />
-    ),
-  },
-  { value: 'wallx', label: 'wallx' },
-  { value: 'wally', label: 'wally' },
-];
+import UseSubredditOptions from '../hooks/UseSubredditOptions';
 
 function Header() {
   const [selected, setSelected] = useState('');
+
+  const subredditOption = UseSubredditOptions();
+  console.log(subredditOption);
 
   const handleChange = (selectedOption) => {
     setSelected(selectedOption);
@@ -39,7 +27,8 @@ function Header() {
       </div>
       <div className="dropdown">
         <Select
-          options={options}
+          options={subredditOption}
+          value={subredditOption[0]}
           isSearchable={false}
           onChange={handleChange}
           autoFocus={true}
