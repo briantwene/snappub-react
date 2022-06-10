@@ -320,24 +320,8 @@ img {
   margin: 0em 0.1em;
 }
 
-.react-aspect-ratio-placeholder {
-  flex-grow: 1;
-}
-.react-aspect-ratio-placeholder .image {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-.react-aspect-ratio-placeholder .image-loading {
-  filter: blur(10px);
-  clip-path: inset(0);
-}
-.react-aspect-ratio-placeholder .image-loaded {
-  filter: blur(0px);
-  transition: filter 0.5s linear;
-}
-
 .img-info {
+  height: 20vh;
   flex-grow: 1;
 }
 .img-info .author {
@@ -346,6 +330,23 @@ img {
   padding: 0em 0em 0.5em 0.5em;
   font-weight: 500;
   font-size: 0.9375rem;
+}
+.img-info .react-aspect-ratio-placeholder {
+  width: 100%;
+  height: 100%;
+}
+.img-info .react-aspect-ratio-placeholder .image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.img-info .react-aspect-ratio-placeholder .image-loading {
+  filter: blur(10px);
+  clip-path: inset(0);
+}
+.img-info .react-aspect-ratio-placeholder .image-loaded {
+  filter: blur(0px);
+  transition: filter 0.5s linear;
 }
 .img-info .avatar {
   object-fit: cover;
