@@ -4,7 +4,8 @@ const image_probe = require('probe-image-size');
 const { fetchData } = require('../models/fetchReddit');
 const { fetchInfo } = require('./fetchInfo');
 const { getFileSize } = require('./getFileSize');
-const skipKeywords = ['gallery', 'imgur.com/a/'];
+const { decode } = require('html-entities');
+const skipKeywords = ['gallery', 'imgur.com/a/', 'www.reddit.com/r/'];
 const reso = [
   {
     width: 2560,
@@ -107,11 +108,11 @@ const reso = [
 const extractor = (image) => {
   //return a promise that gets the data out of the submission on resolving
   return new Promise(async (resolve) => {
-    console.log(image.author);
     resolve({
       author: image.author,
       avatar: await fetchInfo(image.author, 'avatar'),
       pic: image.url,
+      thumb: decode(image.preview.images[0].resolutions[0].url),
       title: image.title,
       rating: image.score,
       created_at: image.created_utc,
@@ -136,7 +137,7 @@ const extractImages = async (postData) => {
     // check for if the image links have the keywords in the array
     //if it does then skip to the next submission
     const image = post.data;
-    if (!skipKeywords.some((word) => image.url.includes(word))) {
+    if (image.url.startsWith('https://i.redd.it/')) {
       //put the promises returned in to the array called promieses
       promises.push(extractor(image));
     } else {

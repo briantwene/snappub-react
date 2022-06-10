@@ -17,8 +17,8 @@ const reddit_api = new snoowrap({
 //for Top 100 Hot posts in r/wallpaper subreddit
 exports.fetchData = async (page, subreddit) => {
   const result = await axios
-    .get(`https://www.reddit.com/r/${subreddit}.json?limit=10&after=${page}`)
+    .get(`https://www.reddit.com/r/${subreddit}.json?limit=20&after=${page}`)
     .then(({ data }) => data);
-
+  console.log(result.data);
   return result;
 };

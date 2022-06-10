@@ -8,16 +8,17 @@ import * as RiIcons from 'react-icons/ri';
 import { Link } from 'react-router-dom';
 import Select from 'react-select';
 import UseSubredditOptions from '../hooks/UseSubredditOptions';
+import { useSubredditStore } from '../utils/store';
 
 function Header() {
-  const [selected, setSelected] = useState('');
-
   const subredditOption = UseSubredditOptions();
-  console.log(subredditOption);
+  const currentSubreddit = useSubredditStore(
+    (state) => state.current_subreddit
+  );
+  const changeSubreddit = useSubredditStore((state) => state.changeSubreddit);
 
   const handleChange = (selectedOption) => {
-    setSelected(selectedOption);
-    console.log(`Option selected:`, selectedOption);
+    changeSubreddit(selectedOption.value);
   };
 
   return (
@@ -28,7 +29,9 @@ function Header() {
       <div className="dropdown">
         <Select
           options={subredditOption}
-          value={subredditOption[0]}
+          defaultValue={subredditOption.find(
+            ({ value }) => value === currentSubreddit
+          )}
           isSearchable={false}
           onChange={handleChange}
           autoFocus={true}

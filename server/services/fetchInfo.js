@@ -10,7 +10,7 @@ exports.fetchInfo = async (author, option) => {
         const {
           data: { data },
         } = response;
-        console.log(data);
+
         return data.snoovatar_img || defaultImageGenerator();
       })
       .catch((e) =>
@@ -24,7 +24,7 @@ exports.fetchInfo = async (author, option) => {
       const {
         data: { data },
       } = response;
-      console.log(data);
+
       return {
         karma: data.total_karma,
         avatar: data.snoovatar_img || defaultImageGenerator(),

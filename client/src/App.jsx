@@ -17,14 +17,14 @@ function App() {
     <>
       <Header />
       <div className="page-body">
-        {/* <div className="content">
+        <div className="content">
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/view" element={<View />} />
             <Route path="/settings" element={<Settings />} />
             <Route path="/download" element={<Download />} />
           </Routes>
-        </div> */}
+        </div>
         <Footer />
       </div>
     </>

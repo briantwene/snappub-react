@@ -21,7 +21,6 @@ async function optionArray() {
           (await axios
             .get(`https://www.reddit.com/r/${subreddit}/about.json`)
             .then(({ data: { data } }) => {
-              console.log(data.icon_img);
               return data.icon_img;
             })) ||
           'https://www.redditstatic.com/avatars/avatar_default_02_A5A4A4.png',

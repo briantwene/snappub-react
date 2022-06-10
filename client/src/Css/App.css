@@ -328,6 +328,14 @@ img {
   height: 100%;
   object-fit: cover;
 }
+.react-aspect-ratio-placeholder .image-loading {
+  filter: blur(10px);
+  clip-path: inset(0);
+}
+.react-aspect-ratio-placeholder .image-loaded {
+  filter: blur(0px);
+  transition: filter 0.5s linear;
+}
 
 .img-info {
   flex-grow: 1;
