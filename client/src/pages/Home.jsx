@@ -62,6 +62,7 @@ function Home() {
           : isError
           ? `Error: ${error.message}`
           : data.map((image, key) => <ImageRenderer image={image} key={key} />)}
+        <div></div>
       </div>
       <div className="pagination-container">
         <button

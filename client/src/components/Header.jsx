@@ -16,7 +16,7 @@ function Header() {
     (state) => state.current_subreddit
   );
   const changeSubreddit = useSubredditStore((state) => state.changeSubreddit);
-
+  const defaultOption = subredditOption[0];
   const handleChange = (selectedOption) => {
     changeSubreddit(selectedOption.value);
   };
@@ -29,9 +29,7 @@ function Header() {
       <div className="dropdown">
         <Select
           options={subredditOption}
-          defaultValue={subredditOption.find(
-            ({ value }) => value === currentSubreddit
-          )}
+          defaultValue={defaultOption}
           isSearchable={false}
           onChange={handleChange}
           autoFocus={true}

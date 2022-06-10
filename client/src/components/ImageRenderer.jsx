@@ -8,10 +8,10 @@ function ImageRenderer({ image, key }) {
 
   return (
     <div className="img-info">
-      {/* <div className="author">
+      <div className="author">
         <img className="avatar" src={avatar} alt={avatar} />
         <span>u/{author}</span>
-      </div> */}
+      </div>
       <AspectRatio ratio={`${image.originRes.width}/${image.originRes.height}`}>
         <Link to="/view" state={{ data: image }}>
           <ProgressiveImg src={pic} placeholder={thumb}>
@@ -28,9 +28,9 @@ function ImageRenderer({ image, key }) {
           </div>
         </Link>
       </AspectRatio>
-      {/* <div className="mobile-res">
+      <div className="mobile-res">
         {`${image.originRes.height}`} &#10005; {`${image.originRes.width}`}
-      </div> */}
+      </div>
     </div>
   );
 }

@@ -3,9 +3,14 @@
   flex-wrap: wrap;
   gap: 50px;
 
-  //height: 100%;
-
   div:last-child {
     flex-grow: 10;
+  }
+}
+
+@include desktop() {
+  .photo_grid {
+    gap: 10px;
+    margin: 1em;
   }
 }

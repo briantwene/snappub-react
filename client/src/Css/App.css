@@ -306,6 +306,12 @@ img {
   flex-grow: 10;
 }
 
+@media (min-width: 768px) {
+  .photo_grid {
+    gap: 10px;
+    margin: 1em;
+  }
+}
 .btn {
   font-size: 1.25rem;
   padding: 0.5em 1em;
@@ -320,10 +326,6 @@ img {
   margin: 0em 0.1em;
 }
 
-.img-info {
-  height: 20vh;
-  flex-grow: 1;
-}
 .img-info .author {
   display: inline-flex;
   align-items: center;
@@ -331,11 +333,7 @@ img {
   font-weight: 500;
   font-size: 0.9375rem;
 }
-.img-info .react-aspect-ratio-placeholder {
-  width: 100%;
-  height: 100%;
-}
-.img-info .react-aspect-ratio-placeholder .image {
+.img-info .react-aspect-ratio-placeholder .image, .img-info .react-aspect-ratio-placeholder .image-loaded, .img-info .react-aspect-ratio-placeholder .image-loading {
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -362,7 +360,24 @@ img {
   font-weight: 500;
   text-align: center;
 }
+@media (min-width: 768px) {
+  .img-info .mobile-res,
+.img-info .author {
+    display: none;
+  }
+}
 
+@media (min-width: 768px) {
+  .img-info {
+    height: 20vh;
+    flex-grow: 1;
+  }
+
+  .react-aspect-ratio-placeholder {
+    width: 100%;
+    height: 100%;
+  }
+}
 .box-info {
   color: white;
   background-color: rgb(39, 39, 39);
@@ -528,7 +543,7 @@ img {
   display: flex;
   justify-content: center;
 }
-.view-image .view-image-container .image {
+.view-image .view-image-container .image, .view-image .view-image-container .img-info .react-aspect-ratio-placeholder .image-loading, .img-info .react-aspect-ratio-placeholder .view-image .view-image-container .image-loading, .view-image .view-image-container .img-info .react-aspect-ratio-placeholder .image-loaded, .img-info .react-aspect-ratio-placeholder .view-image .view-image-container .image-loaded {
   max-width: 100%;
   max-height: 100%;
   display: block;
