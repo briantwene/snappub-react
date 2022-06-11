@@ -620,11 +620,17 @@ img {
   position: relative;
   background: black;
 }
+.gallery-title-overlay-noBanner {
+  height: 10vh;
+  display: flex;
+  align-items: center;
+  background: none;
+}
 .gallery-title-overlay .image-overlay {
   object-fit: cover;
   opacity: 0.4;
 }
-.gallery-title-overlay .title {
+.gallery-title-overlay .title, .gallery-title-overlay .title-noBanner {
   display: inline;
   font-size: 1.75rem;
   font-weight: 700;
@@ -638,6 +644,9 @@ img {
   height: 100%;
   width: 100%;
   color: white;
+}
+.gallery-title-overlay .title-noBanner {
+  color: black;
 }
 
 .pagination-container {

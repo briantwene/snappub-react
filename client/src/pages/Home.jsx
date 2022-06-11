@@ -53,12 +53,14 @@ function Home() {
 
   return (
     <>
-      <div className="gallery-title-overlay">
-        {subredditBanner && (
-          <img src={subredditBanner} alt="" className="image-overlay" />
-        )}
+      <div
+        className={`gallery-title-overlay${subredditBanner ? '' : '-noBanner'}`}
+      >
+        <img src={subredditBanner} alt="" className="image-overlay" />
 
-        <h1 className="title">r/{currentSubreddit}</h1>
+        <h1 className={`title${subredditBanner ? '' : '-noBanner'}`}>
+          r/{currentSubreddit}
+        </h1>
       </div>
       {/* <Filter /> */}
       <div className="photo_grid">

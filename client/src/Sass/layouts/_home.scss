@@ -1,6 +1,15 @@
 .gallery-title-overlay {
   position: relative;
+
   background: black;
+
+  &-noBanner {
+    height: 10vh;
+    display: flex;
+    align-items: center;
+    background: none;
+  }
+
   .image-overlay {
     object-fit: cover;
     opacity: 0.4;
@@ -19,6 +28,12 @@
     height: 100%;
     width: 100%;
     color: white;
+
+    &-noBanner {
+      @extend .title;
+
+      color: black;
+    }
   }
 }
 
