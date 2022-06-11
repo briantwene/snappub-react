@@ -473,86 +473,83 @@ img {
   animation: 1s linear 1s infinite spin;
 }
 
-.view {
-  height: 100%;
-}
-
-.view-body {
-  height: 100%;
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: auto auto auto;
-  grid-template-areas: "title" "image" "info";
-}
-
 .view-top {
-  grid-area: title;
   display: flex;
-  padding: 1em;
   justify-content: space-between;
+  align-items: center;
+  height: 7.5vh;
+  width: 100%;
   position: sticky;
-  background-color: white;
   top: 0;
   left: 0;
   z-index: 1;
+  background-color: white;
 }
-.view-top .view-left {
+.view-top-info {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  max-width: 50%;
 }
-.view-top .view-left .view-title {
-  font-size: 1.3125rem;
-  font-weight: 600;
-  margin-bottom: 0.1em;
+.view-top-title {
+  display: none;
 }
-.view-top .view-left .view-author {
+.view-top-poster {
   display: flex;
-  align-items: center;
+  padding: 0em 1em;
 }
-.view-top .view-download {
+.view-top-poster img {
+  width: 32px;
+  height: 32px;
+  margin-right: 1em;
+  border-radius: 50%;
+}
+.view-top-download {
   display: flex;
-  font-size: 1rem;
   width: auto;
   flex-direction: row;
   align-items: center;
 }
-.view-top .view-download .download-link {
+.view-top-download .download-btn {
+  font-size: 1rem;
   background: linear-gradient(to right, #00c9ff, #92fe9d);
   color: white;
   padding: 0.5em 1.5em;
   margin: 0em 1em;
   text-align: center;
   border-radius: 5px;
+  border: none;
 }
-.view-top .view-download .download {
+.view-top-download .download {
   text-decoration: none;
 }
-.view-image {
-  height: 75vh;
-  grid-area: image;
-  display: flex;
-  justify-content: center;
-  margin: 0.5em 3em;
-  overflow: auto;
-}
-.view-image .view-image-container {
+.view-image img {
+  width: 100%;
   height: 100%;
-  aspect-ratio: auto;
-  display: flex;
-  justify-content: center;
-}
-.view-image .view-image-container .image, .view-image .view-image-container .img-info .react-aspect-ratio-placeholder .image-loading, .img-info .react-aspect-ratio-placeholder .view-image .view-image-container .image-loading, .view-image .view-image-container .img-info .react-aspect-ratio-placeholder .image-loaded, .img-info .react-aspect-ratio-placeholder .view-image .view-image-container .image-loaded {
-  max-width: 100%;
-  max-height: 100%;
-  display: block;
 }
 
+@media (min-width: 768px) {
+  .view-image {
+    width: 50%;
+  }
+
+  .view-top {
+    justify-content: space-evenly;
+    font-weight: 500;
+  }
+  .view-top-title {
+    display: block;
+    font-size: 1.3125rem;
+    font-weight: 600;
+    margin-bottom: 0.1em;
+  }
+  .view-top-poster {
+    padding: 0;
+  }
+}
 .view-info {
   margin: 1em;
   grid-area: info;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: flex-start;
   gap: 10px;
@@ -560,7 +557,7 @@ img {
 .view-info .infobox {
   border-radius: 5px;
   border: 1px rgba(26, 26, 26, 0.15) solid;
-  width: 25%;
+  width: 100%;
 }
 .view-info .author-info-inner {
   padding: 1em;
