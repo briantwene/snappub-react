@@ -20,7 +20,7 @@ function Header() {
   );
   const changeSubreddit = useSubredditStore((state) => state.changeSubreddit);
   const defaultOption = subredditOption[0];
-  console.log(defaultOption);
+
   const handleChange = (selectedOption) => {
     changeSubreddit(selectedOption.value);
     setSubredditBanner(selectedOption.banner);

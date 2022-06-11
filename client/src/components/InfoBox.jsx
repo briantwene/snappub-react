@@ -1,7 +1,6 @@
-import React from "react";
+import React from 'react';
 
 function InfoBox(props) {
-  console.log(props);
   return (
     <div className="box-info">
       <button className="close" onClick={() => props.close()}>
@@ -12,7 +11,7 @@ function InfoBox(props) {
         <br />
         <span className="author">Posted By: u/{props.author}</span>
         <span className="originRes">
-          Original Resolution:{" "}
+          Original Resolution:{' '}
           {`${props.originRes.width} X ${props.originRes.height}`}
         </span>
         <span>Rating: {props.rating} Upvotes</span>

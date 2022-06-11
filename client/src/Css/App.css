@@ -185,6 +185,11 @@ img {
   color: transparent;
   animation: bg-animation 25s ease-in-out infinite;
 }
+@media (min-width: 768px) {
+  .header .logo {
+    font-size: 1.5rem;
+  }
+}
 .header .navlink {
   color: black;
 }

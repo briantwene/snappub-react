@@ -4,10 +4,15 @@ import { decode } from 'html-entities';
 const subreddits = [
   'wallpaper',
   'MobileWallpaper',
+  'iphonewallpapers',
+  'iphonexwallpapers',
   'wallpapers',
+  'phonewallpapers',
   'Animewallpaper',
-  // 'SkyPorn',
-  // 'Beachporn',
+  'iWallpaper',
+  'earthporn',
+  'SkyPorn',
+  'Beachporn',
   'ImaginaryLandscapes',
   'ImaginaryCityscapes',
 ];
@@ -38,7 +43,7 @@ async function optionArray() {
   }
 
   const results = await Promise.all(promises);
-  console.log(results);
+
   return results;
 }
 

@@ -9,7 +9,6 @@ import View from './pages/View';
 import Settings from './pages/Settings';
 import Header from './components/Header';
 import Footer from './components/Footer';
-import Download from './pages/Download';
 
 function App() {
   //const [currentSub, setCurrentSub] = useState('');
@@ -28,7 +27,6 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/view" element={<View />} />
             <Route path="/settings" element={<Settings />} />
-            <Route path="/download" element={<Download />} />
           </Routes>
         </div>
         <Footer />

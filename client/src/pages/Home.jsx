@@ -6,7 +6,6 @@ import { ReactComponent as Logo } from '../components/loading.svg';
 import Filter from '../components/Filter';
 import { Link } from 'react-router-dom';
 import ImageRenderer from '../components/ImageRenderer';
-import PhotoGrid from '../components/PhotoGrid';
 import { useQuery } from 'react-query';
 import * as RiIcons from 'react-icons/ri';
 import { useSubredditStore } from '../utils/store';
