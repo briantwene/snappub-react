@@ -1,17 +1,9 @@
 'use strict';
 //import snoowarp reddit api wrapper
-const snoowrap = require('snoowrap');
+
 const axios = require('axios');
 
 const fs = require('fs/promises');
-
-//enter credentials to setup api
-const reddit_api = new snoowrap({
-  userAgent: process.env.UA,
-  clientId: process.env.ID,
-  clientSecret: process.env.SECRET,
-  refreshToken: process.env.REFRESH,
-});
 
 //method for querying api
 //for Top 100 Hot posts in r/wallpaper subreddit
