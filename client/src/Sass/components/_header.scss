@@ -32,6 +32,11 @@
       animation: bg-animation 25s ease-in-out infinite;
     }
   }
+  @include desktop() {
+    .logo {
+      font-size: em(24);
+    }
+  }
 
   .navlink {
     color: black;

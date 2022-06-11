@@ -185,6 +185,11 @@ img {
   color: transparent;
   animation: bg-animation 25s ease-in-out infinite;
 }
+@media (min-width: 768px) {
+  .header .logo {
+    font-size: 1.5rem;
+  }
+}
 .header .navlink {
   color: black;
 }
@@ -617,16 +622,24 @@ img {
 }
 
 .gallery-title-overlay {
-  padding: 1em 0.5em;
+  position: relative;
+  background: black;
 }
-.gallery-title-overlay .title {
+.gallery-title-overlay-noBanner {
+  height: 10vh;
+  display: flex;
+  align-items: center;
+  background: none;
+}
+.gallery-title-overlay .image-overlay {
+  object-fit: cover;
+  opacity: 0.4;
+}
+.gallery-title-overlay .title, .gallery-title-overlay .title-noBanner {
   display: inline;
   font-size: 1.75rem;
   font-weight: 700;
   line-height: 1.25;
-}
-
-.gallery-title {
   position: absolute;
   top: 0;
   left: 0;
@@ -635,6 +648,9 @@ img {
   justify-content: center;
   height: 100%;
   width: 100%;
+  color: white;
+}
+.gallery-title-overlay .title-noBanner {
   color: black;
 }
 

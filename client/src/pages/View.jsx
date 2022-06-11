@@ -25,7 +25,6 @@ function View() {
         responseType: 'blob',
       })
       .then(({ data, headers }) => {
-        console.log(data);
         fileDownload(data, headers.imgfilename);
       });
   };

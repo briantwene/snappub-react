@@ -6,7 +6,6 @@ import { ReactComponent as Logo } from '../components/loading.svg';
 import Filter from '../components/Filter';
 import { Link } from 'react-router-dom';
 import ImageRenderer from '../components/ImageRenderer';
-import PhotoGrid from '../components/PhotoGrid';
 import { useQuery } from 'react-query';
 import * as RiIcons from 'react-icons/ri';
 import { useSubredditStore } from '../utils/store';
@@ -22,6 +21,7 @@ function Home() {
   const incrementPage = useSubredditStore((state) => state.incrementPage);
   const decrementPage = useSubredditStore((state) => state.decrementPage);
   const updatePageMap = useSubredditStore((state) => state.updatePageMap);
+  const subredditBanner = useSubredditStore((state) => state.subredditBanner);
 
   const lastPage = () => {
     if (page !== 0 && pageMap[page] === null) return true;
@@ -52,8 +52,14 @@ function Home() {
 
   return (
     <>
-      <div className="gallery-title-overlay">
-        <h1 className="title">r/{currentSubreddit}</h1>
+      <div
+        className={`gallery-title-overlay${subredditBanner ? '' : '-noBanner'}`}
+      >
+        <img src={subredditBanner} alt="" className="image-overlay" />
+
+        <h1 className={`title${subredditBanner ? '' : '-noBanner'}`}>
+          r/{currentSubreddit}
+        </h1>
       </div>
       {/* <Filter /> */}
       <div className="photo_grid">
