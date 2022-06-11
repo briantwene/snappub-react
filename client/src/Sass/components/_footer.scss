@@ -2,7 +2,9 @@
   background: $FooterColour;
   color: white;
   display: flex;
+  justify-content: space-between;
   padding: 1em;
+  height: 10vh;
 
   .footer-section {
     width: 100%;

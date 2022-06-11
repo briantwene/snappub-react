@@ -9,55 +9,51 @@ import ImageRenderer from '../components/ImageRenderer';
 import PhotoGrid from '../components/PhotoGrid';
 import { useQuery } from 'react-query';
 import * as RiIcons from 'react-icons/ri';
+import { useSubredditStore } from '../utils/store';
 
 function Home() {
   //declare page state variable
-  const [page, setPage] = useState(0);
-  const [pageMap, setPageMap] = useState(new Map([[0, null]]));
+
+  const currentSubreddit = useSubredditStore(
+    (state) => state.current_subreddit
+  );
+  const page = useSubredditStore((state) => state.page);
+  const pageMap = useSubredditStore((state) => state.pageMap);
+  const incrementPage = useSubredditStore((state) => state.incrementPage);
+  const decrementPage = useSubredditStore((state) => state.decrementPage);
+  const updatePageMap = useSubredditStore((state) => state.updatePageMap);
 
   const lastPage = () => {
     if (page !== 0 && pageMap[page] === null) return true;
     return false;
   };
-  const modMap = (value) => {
-    //then add the next value
-    if (!pageMap.has(page + 1))
-      setPageMap((prevMap) => prevMap.set(page + 1, value));
-  };
+
   const { isLoading, isError, data, error, isPreviousData, isFetching } =
     useQuery(
-      ['pictures', pageMap.get(page)],
-      () => fetchImages(pageMap.get(page)),
+      [currentSubreddit, pageMap.get(page)],
+      () => fetchImages(pageMap.get(page), currentSubreddit),
       {
         keepPreviousData: true,
       }
     );
 
-  async function fetchImages(page = null) {
-    return await axios
-      .get(`/api/images`, { params: { page: page, subreddit: 'wallpaper' } })
-      .then(({ data }) => {
-        modMap(data.next);
-        return data.data;
-      })
-      .catch((e) => console.log('there was error', e));
-  }
+  async function fetchImages(page = null, subreddit) {
+    const { data } = await axios.get(`/api/images`, {
+      params: { page: page, subreddit: subreddit },
+    });
 
-  if (isLoading) {
-    return <span>Loading....</span>;
-  }
+    if (!data) {
+      throw new Error('there was an error in fetching image data');
+    }
 
-  if (isError) {
-    return <span>{error.message}</span>;
+    updatePageMap(data.next);
+    return data.data;
   }
 
   return (
     <>
       <div className="gallery-title-overlay">
-        <img src="/pietro-de-grandi-T7K4aEPoGGk-unsplash.jpeg" alt="" />
-        <section className="gallery-title">
-          <div className="title">Wallpapers from Reddit</div>
-        </section>
+        <h1 className="title">r/{currentSubreddit}</h1>
       </div>
       {/* <Filter /> */}
       <div className="photo_grid">
@@ -66,13 +62,12 @@ function Home() {
           : isError
           ? `Error: ${error.message}`
           : data.map((image, key) => <ImageRenderer image={image} key={key} />)}
-
         <div></div>
       </div>
       <div className="pagination-container">
         <button
           className="pagination-btn"
-          onClick={() => setPage((old) => Math.max(old - 1, 0))}
+          onClick={decrementPage}
           disabled={page === 0}
         >
           <RiIcons.RiArrowDropLeftLine />
@@ -80,7 +75,7 @@ function Home() {
         <span>{page + 1}</span>
         <button
           className="pagination-btn"
-          onClick={() => setPage((old) => old + 1)}
+          onClick={incrementPage}
           disabled={lastPage()}
         >
           <RiIcons.RiArrowDropRightLine />

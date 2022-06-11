@@ -1,19 +1,11 @@
 .footerLeft {
   display: flex;
-  flex-direction: column;
-  justify-content: space-around;
+  justify-content: center;
+  align-items: center;
   .footer-title {
     font: {
       weight: 800;
-      size: em(36);
-    }
-  }
-
-  .builtIcon {
-    font-size: em(24);
-    span,
-    svg {
-      vertical-align: middle;
+      size: em(16);
     }
   }
 }
