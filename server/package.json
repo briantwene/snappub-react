@@ -20,7 +20,6 @@
     "snoowrap": "^1.23.0"
   },
   "devDependencies": {
-    "dotenv": "^10.0.0",
     "eslint": "^8.6.0",
     "nodemon": "^2.0.15"
   }
