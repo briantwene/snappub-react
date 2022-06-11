@@ -15,12 +15,31 @@ function Header() {
   const currentSubreddit = useSubredditStore(
     (state) => state.current_subreddit
   );
+  const setSubredditBanner = useSubredditStore(
+    (state) => state.setSubredditBanner
+  );
   const changeSubreddit = useSubredditStore((state) => state.changeSubreddit);
   const defaultOption = subredditOption[0];
+  console.log(defaultOption);
   const handleChange = (selectedOption) => {
     changeSubreddit(selectedOption.value);
+    setSubredditBanner(selectedOption.banner);
   };
-
+  const defaultVal = {
+    icon: (
+      <img
+        src={
+          'https://a.thumbs.redditmedia.com/APweUko3qLJ0prsQI1giluMwBdcVnokw9_yZcby4SB8.png'
+        }
+        alt={'wallpaper'}
+        className="subreddit-icon"
+      />
+    ),
+    banner:
+      'https://styles.redditmedia.com/t5_2qmjl/styles/bannerBackgroundImage_2qok6gpoiud71.png?width=4000&s=6b7f7b1846d648c37b4c12393a8ba2fe067300ca',
+    value: 'wallpaper',
+    label: 'r/wallpaper',
+  };
   return (
     <div className="header">
       <div className="logo">
@@ -29,7 +48,7 @@ function Header() {
       <div className="dropdown">
         <Select
           options={subredditOption}
-          defaultValue={defaultOption}
+          defaultValue={defaultVal}
           isSearchable={false}
           onChange={handleChange}
           autoFocus={true}

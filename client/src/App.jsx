@@ -13,9 +13,15 @@ import Download from './pages/Download';
 
 function App() {
   //const [currentSub, setCurrentSub] = useState('');
+  const defaultValue = {
+    icon: 'https://a.thumbs.redditmedia.com/APweUko3qLJ0prsQI1giluMwBdcVnokw9_yZcby4SB8.png',
+    banner:
+      'https://styles.redditmedia.com/t5_2qmjl/styles/bannerBackgroundImage_2qok6gpoiud71.png?width=4000&s=6b7f7b1846d648c37b4c12393a8ba2fe067300ca',
+    name: 'wallpaper',
+  };
   return (
     <>
-      <Header />
+      <Header defaultVal={defaultValue} />
       <div className="page-body">
         <div className="content">
           <Routes>

@@ -21,6 +21,7 @@ function UseSubredditOptions() {
           className="subreddit-icon"
         />
       ),
+      banner: subreddit.banner,
     };
   });
   return subredditOptions;

@@ -617,16 +617,18 @@ img {
 }
 
 .gallery-title-overlay {
-  padding: 1em 0.5em;
+  position: relative;
+  background: black;
+}
+.gallery-title-overlay .image-overlay {
+  object-fit: cover;
+  opacity: 0.4;
 }
 .gallery-title-overlay .title {
   display: inline;
   font-size: 1.75rem;
   font-weight: 700;
   line-height: 1.25;
-}
-
-.gallery-title {
   position: absolute;
   top: 0;
   left: 0;
@@ -635,7 +637,7 @@ img {
   justify-content: center;
   height: 100%;
   width: 100%;
-  color: black;
+  color: white;
 }
 
 .pagination-container {

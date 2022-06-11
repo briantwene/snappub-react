@@ -22,6 +22,7 @@ function Home() {
   const incrementPage = useSubredditStore((state) => state.incrementPage);
   const decrementPage = useSubredditStore((state) => state.decrementPage);
   const updatePageMap = useSubredditStore((state) => state.updatePageMap);
+  const subredditBanner = useSubredditStore((state) => state.subredditBanner);
 
   const lastPage = () => {
     if (page !== 0 && pageMap[page] === null) return true;
@@ -53,6 +54,10 @@ function Home() {
   return (
     <>
       <div className="gallery-title-overlay">
+        {subredditBanner && (
+          <img src={subredditBanner} alt="" className="image-overlay" />
+        )}
+
         <h1 className="title">r/{currentSubreddit}</h1>
       </div>
       {/* <Filter /> */}

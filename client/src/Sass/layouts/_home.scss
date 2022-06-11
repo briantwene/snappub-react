@@ -1,24 +1,28 @@
 .gallery-title-overlay {
-  padding: 1em 0.5em;
+  position: relative;
+  background: black;
+  .image-overlay {
+    object-fit: cover;
+    opacity: 0.4;
+  }
   .title {
     display: inline;
     font-size: em(28);
     font-weight: 700;
     line-height: 1.25;
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+    color: white;
   }
 }
 
 .gallery-title {
-  position: absolute;
-  top: 0;
-  left: 0;
-  display: flex;
-
-  align-items: center;
-  justify-content: center;
-  height: 100%;
-  width: 100%;
-  color: black;
 }
 
 // position: relative;
