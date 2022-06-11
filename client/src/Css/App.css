@@ -303,6 +303,7 @@ img {
 }
 
 .photo_grid {
+  margin-top: 2em;
   display: flex;
   flex-wrap: wrap;
   gap: 50px;
