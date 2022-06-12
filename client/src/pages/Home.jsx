@@ -58,7 +58,10 @@ function Home() {
         <img src={subredditBanner} alt="" className="image-overlay" />
 
         <h1 className={`title${subredditBanner ? '' : '-noBanner'}`}>
-          r/{currentSubreddit}
+          r/
+          {currentSubreddit.toLowerCase().endsWith('porn')
+            ? currentSubreddit.toLowerCase().replace('porn', '****')
+            : currentSubreddit}
         </h1>
       </div>
       {/* <Filter /> */}
