@@ -19,9 +19,7 @@
     "url": "https://github.com/bt521/snappub-react/issues"
   },
   "homepage": "https://github.com/bt521/snappub-react#readme",
-  "engines": {
-    "node": "v16.14.2"
-  },
+
   "dependencies": {
     "react-custom-properties": "^1.2.0"
   }
