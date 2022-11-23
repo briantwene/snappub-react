@@ -2,7 +2,6 @@
 // #Author: Brian Twene (@bt521)
 // #Date:12/12/21
 import React from 'react';
-import { SiReact, SiNodedotjs, SiExpress } from 'react-icons/si';
 
 function FooterLeft() {
   return (

@@ -1,10 +1,7 @@
-import { useState, useEffect } from 'react';
 import axios from 'axios';
 
 import '../Css/App.css';
-import { ReactComponent as Logo } from '../components/loading.svg';
-import Filter from '../components/Filter';
-import { Link } from 'react-router-dom';
+
 import ImageRenderer from '../components/ImageRenderer';
 import { useQuery } from 'react-query';
 import * as RiIcons from 'react-icons/ri';
@@ -28,14 +25,13 @@ function Home() {
     return false;
   };
 
-  const { isLoading, isError, data, error, isPreviousData, isFetching } =
-    useQuery(
-      [currentSubreddit, pageMap.get(page)],
-      () => fetchImages(pageMap.get(page), currentSubreddit),
-      {
-        keepPreviousData: true,
-      }
-    );
+  const { isLoading, isError, data, error, isFetching } = useQuery(
+    [currentSubreddit, pageMap.get(page)],
+    () => fetchImages(pageMap.get(page), currentSubreddit),
+    {
+      keepPreviousData: true,
+    }
+  );
 
   async function fetchImages(page = null, subreddit) {
     const { data } = await axios.get(`/api/images`, {

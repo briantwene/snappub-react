@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import ProgressiveImg from 'react-progressive-graceful-image';
 
 function ImageRenderer({ image, key }) {
-  const { originRes, pic, thumb, author, avatar, title } = image;
+  const { pic, thumb, author, avatar } = image;
 
   return (
     <div className="img-info">

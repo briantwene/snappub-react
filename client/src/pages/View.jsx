@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
-import * as RiIcons from 'react-icons/ri';
+
 import axios from 'axios';
 import numeral from 'numeral';
 import fileDownload from 'js-file-download';
@@ -31,6 +31,7 @@ function View() {
 
   useEffect(() => {
     fetchAuthor();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
     <>
@@ -38,7 +39,7 @@ function View() {
         <div className="view-top-info">
           <div className="view-top-title">{imgData.title}</div>
           <div className="view-top-poster">
-            <img className="view-top-avatar" src={author.avatar} />
+            <img alt="avatar" className="view-top-avatar" src={author.avatar} />
 
             <div className="view-top-name">{imgData.author}</div>
           </div>
@@ -56,14 +57,18 @@ function View() {
         </div>
       </div>
       <div className="view-image">
-        <img class="image" src={imgData.pic} />
+        <img alt={imgData.title} class="image" src={imgData.pic} />
       </div>
       <div className="view-info">
         <div className="author-info infobox">
           <div className="author-info-inner">
             <div className="author-info-title">Author</div>
             <div className="author-info-content">
-              <img className="view-author-img" src={author.avatar} />
+              <img
+                alt={imgData.author}
+                className="view-author-img"
+                src={author.avatar}
+              />
               <div className="author-info-stats">
                 <span className="author-name">{`u/${author.name}`}</span>
                 <span className="author-karma">

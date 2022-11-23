@@ -1,4 +1,4 @@
-import React from 'react';
+
 import axios from 'axios';
 import { decode } from 'html-entities';
 const subreddits = [

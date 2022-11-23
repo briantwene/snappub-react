@@ -1,25 +1,19 @@
 // #Filename: Header.jsx
 // #Author: Brian Twene (@bt521)
 // #Date:12/12/21
-import React, { useState } from 'react';
-import Button from './Button';
+import React from 'react';
 
-import * as RiIcons from 'react-icons/ri';
-import { Link } from 'react-router-dom';
 import Select from 'react-select';
 import UseSubredditOptions from '../hooks/UseSubredditOptions';
 import { useSubredditStore } from '../utils/store';
 
 function Header() {
   const subredditOption = UseSubredditOptions();
-  const currentSubreddit = useSubredditStore(
-    (state) => state.current_subreddit
-  );
+
   const setSubredditBanner = useSubredditStore(
     (state) => state.setSubredditBanner
   );
   const changeSubreddit = useSubredditStore((state) => state.changeSubreddit);
-  const defaultOption = subredditOption[0];
 
   const handleChange = (selectedOption) => {
     changeSubreddit(selectedOption.value);
