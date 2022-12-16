@@ -13,11 +13,10 @@ function UseSubredditOptions() {
   const subredditOptions = optionResults.map((subreddit) => {
     return {
       value: subreddit.name,
-      label: `r/${
-        subreddit.name.toLowerCase().endsWith('porn')
-          ? subreddit.name.toLowerCase().replace('porn', '****')
-          : subreddit.name
-      }`,
+      label: `r/${subreddit.name.toLowerCase().endsWith('porn')
+        ? subreddit.name.toLowerCase().replace('porn', '****')
+        : subreddit.name
+        }`,
       icon: (
         <img
           src={subreddit.icon}

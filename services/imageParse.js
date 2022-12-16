@@ -3,7 +3,7 @@
 const image_probe = require('probe-image-size');
 const { fetchData } = require('../models/fetchReddit');
 const { fetchInfo } = require('./fetchInfo');
-const { getFileSize } = require('./getFileSize');
+import getFileSize from './getFileSize';
 const { decode } = require('html-entities');
 const skipKeywords = ['gallery', 'imgur.com/a/', 'www.reddit.com/r/'];
 const reso = [
@@ -154,7 +154,7 @@ const extractImages = async (postData) => {
 };
 
 //method for getting the data from the images
-exports.getImageData = async (page, subreddit) => {
+export const getImageData = async (page, subreddit) => {
   //await the helper functions for the extracted data
   const imageData = await fetchData(page, subreddit)
     .then(async (result) => {

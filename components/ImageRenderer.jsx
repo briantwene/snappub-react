@@ -1,6 +1,7 @@
 import React from 'react';
 import { AspectRatio } from 'react-aspect-ratio';
-import { Link } from 'react-router-dom';
+
+import Link from 'next/link';
 import ProgressiveImg from 'react-progressive-graceful-image';
 
 function ImageRenderer({ image, key }) {
@@ -13,7 +14,7 @@ function ImageRenderer({ image, key }) {
         <span>u/{author}</span>
       </div>
       <AspectRatio ratio={`${image.originRes.width}/${image.originRes.height}`}>
-        <Link to="/view" state={{ data: image }}>
+        <Link href="/view" state={{ data: image }}>
           <ProgressiveImg src={pic} placeholder={thumb}>
             {(src, loading) => (
               <img
