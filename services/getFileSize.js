@@ -1,7 +1,7 @@
 const axios = require('axios');
 const bytes = require('bytes');
 
-getFileSize = async (url) => {
+export const getFileSize = async (url) => {
   fileSize = await axios
     .head(url)
     .then((data) => {
@@ -12,4 +12,3 @@ getFileSize = async (url) => {
   return bytes.format(parseInt(fileSize));
 };
 
-module.exports = { getFileSize };

@@ -1,6 +1,5 @@
 import axios from 'axios';
 
-import '../Css/App.css';
 
 import ImageRenderer from '../components/ImageRenderer';
 import { useQuery } from 'react-query';
@@ -65,8 +64,8 @@ function Home() {
         {isLoading || isFetching
           ? 'LOADING....'
           : isError
-          ? `Error: ${error.message}`
-          : data.map((image, key) => <ImageRenderer image={image} key={key} />)}
+            ? `Error: ${error.message}`
+            : data.map((image, key) => <ImageRenderer image={image} key={key} />)}
         <div></div>
       </div>
       <div className="pagination-container">
