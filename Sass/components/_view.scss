@@ -41,6 +41,7 @@
 
     .download-btn {
       font-size: em(16);
+      font-weight: 600;
       background: linear-gradient(to right, #00c9ff, #92fe9d);
       color: white;
       padding: 0.5em 1.5em;
@@ -48,6 +49,16 @@
       text-align: center;
       border-radius: 5px;
       border: none;
+
+      a,
+      a:visited,
+      a:active {
+        color: white;
+      }
+
+      a:hover {
+        text-decoration: none;
+      }
     }
 
     .download {
