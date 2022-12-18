@@ -3,15 +3,15 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@testing-library/jest-dom": "^5.16.5",
-    "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^14.4.3",
     "axios": "^1.2.1",
+    "bytes": "^3.1.2",
     "file-saver": "^2.0.5",
     "html-entities": "^2.3.3",
     "js-file-download": "^0.4.12",
     "next": "^13.0.7",
     "numeral": "^2.0.6",
+    "probe-image-size": "^7.2.3",
     "react": "^18.2.0",
     "react-aspect-ratio": "^1.1.2",
     "react-dom": "^18.2.0",
@@ -21,16 +21,13 @@
     "react-select": "^5.3.2",
     "sass": "^1.50.0",
     "web-vitals": "^2.1.2",
-    "zustand": "^4.0.0-rc.1",
-    "html-entities": "^2.3.3",
-    "probe-image-size": "^7.2.3",
-    "bytes": "^3.1.2"
+    "zustand": "^4.0.0-rc.1"
   },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "eject": "react-scripts eject",
+    "test-ci": "jest --ci",
     "sass": "sass src/Sass:src/Css --watch --no-source-map"
   },
   "eslintConfig": {
@@ -50,5 +47,11 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@testing-library/jest-dom": "^5.16.5",
+    "@testing-library/react": "^13.4.0",
+    "jest": "^29.3.1",
+    "jest-environment-jsdom": "^29.3.1"
   }
 }

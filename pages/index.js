@@ -10,25 +10,26 @@ function Home() {
   //declare page state variable
 
   const currentSubreddit = useSubredditStore(
-    (state) => state.current_subreddit
+    (state) => state?.current_subreddit
   );
-  const page = useSubredditStore((state) => state.page);
-  const pageMap = useSubredditStore((state) => state.pageMap);
-  const incrementPage = useSubredditStore((state) => state.incrementPage);
-  const decrementPage = useSubredditStore((state) => state.decrementPage);
-  const updatePageMap = useSubredditStore((state) => state.updatePageMap);
-  const subredditBanner = useSubredditStore((state) => state.subredditBanner);
+  const page = useSubredditStore((state) => state?.page);
+  const pageMap = useSubredditStore((state) => state?.pageMap);
+  const incrementPage = useSubredditStore((state) => state?.incrementPage);
+  const decrementPage = useSubredditStore((state) => state?.decrementPage);
+  const updatePageMap = useSubredditStore((state) => state?.updatePageMap);
+  const subredditBanner = useSubredditStore((state) => state?.subredditBanner);
 
-  const lastPage = () => {
-    if (page !== 0 && pageMap[page] === null) return true;
-    return false;
-  };
+  // const lastPage = () => {
+  //   if (page !== 0 && pageMap[page] === null) return true;
+  //   return false;
+  // };
 
   const { isLoading, isError, data, error, isFetching } = useQuery(
-    [currentSubreddit, pageMap.get(page)],
-    () => fetchImages(pageMap.get(page), currentSubreddit),
+    [currentSubreddit],
+    () => fetchImages(null, currentSubreddit),
     {
-      keepPreviousData: true,
+      // keepPreviousData: true,
+      refetchOnWindowFocus: false,
     }
   );
 
@@ -41,7 +42,7 @@ function Home() {
       throw new Error('there was an error in fetching image data');
     }
 
-    updatePageMap(data.next);
+    // updatePageMap(data.next);
     return data.data;
   }
 
@@ -54,8 +55,8 @@ function Home() {
 
         <h1 className={`title${subredditBanner ? '' : '-noBanner'}`}>
           r/
-          {currentSubreddit.toLowerCase().endsWith('porn')
-            ? currentSubreddit.toLowerCase().replace('porn', '****')
+          {currentSubreddit?.toLowerCase().endsWith('porn')
+            ? currentSubreddit?.toLowerCase().replace('porn', '****')
             : currentSubreddit}
         </h1>
       </div>
@@ -68,7 +69,7 @@ function Home() {
             : data.map((image, key) => <ImageRenderer image={image} key={key} />)}
         <div></div>
       </div>
-      <div className="pagination-container">
+      {/* <div className="pagination-container">
         <button
           className="pagination-btn"
           onClick={decrementPage}
@@ -84,7 +85,7 @@ function Home() {
         >
           <RiIcons.RiArrowDropRightLine />
         </button>
-      </div>
+      </div> */}
     </>
   );
 }

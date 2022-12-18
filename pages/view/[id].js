@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-
+import { getOneImage } from "../api/info"
 
 import axios from 'axios';
 import numeral from 'numeral';
@@ -7,21 +7,23 @@ import fileDownload from 'js-file-download';
 
 //will go to the view page
 
-function View() {
-  const location = useLocation();
-  const imgData = location.state.data;
-  const [author, setAuthor] = useState({});
+function View({ data }) {
 
-  const fetchAuthor = () => {
-    axios
-      .get('/info/author', { params: { author: imgData.author } })
-      .then(({ data }) => setAuthor(data));
-  };
+  console.log("view", data)
+  // const location = useLocation();
+  // const data = location.state.data;
+  // const [data, setdata] = useState({});
+
+  // const fetchdata = () => {
+  //   axios
+  //     .get('/info/data', { params: { data: data.data } })
+  //     .then(({ data }) => setdata(data));
+  // };
 
   const downloadRequest = () => {
     axios
       .get('/download/image', {
-        params: { url: imgData.pic, title: imgData.title },
+        params: { url: data.pic, title: data.title },
         responseType: 'blob',
       })
       .then(({ data, headers }) => {
@@ -29,19 +31,19 @@ function View() {
       });
   };
 
-  useEffect(() => {
-    fetchAuthor();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  // useEffect(() => {
+  //   fetchdata();
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, []);
   return (
     <>
       <div className="view-top">
         <div className="view-top-info">
-          <div className="view-top-title">{imgData.title}</div>
+          <div className="view-top-title">{data?.title}</div>
           <div className="view-top-poster">
-            <img alt="avatar" className="view-top-avatar" src={author.avatar} />
+            <img alt="avatar" className="view-top-avatar" src={data?.avatar} />
 
-            <div className="view-top-name">{imgData.author}</div>
+            <div className="view-top-name">{data?.author}</div>
           </div>
         </div>
 
@@ -57,7 +59,7 @@ function View() {
         </div>
       </div>
       <div className="view-image">
-        <img alt={imgData.title} class="image" src={imgData.pic} />
+        <img alt={data?.title} class="image" src={data?.url} />
       </div>
       <div className="view-info">
         <div className="author-info infobox">
@@ -65,14 +67,14 @@ function View() {
             <div className="author-info-title">Author</div>
             <div className="author-info-content">
               <img
-                alt={imgData.author}
+                alt={data?.author}
                 className="view-author-img"
-                src={author.avatar}
+                src={data?.avatar}
               />
               <div className="author-info-stats">
-                <span className="author-name">{`u/${author.name}`}</span>
+                <span className="author-name">{`u/${data?.author}`}</span>
                 <span className="author-karma">
-                  {numeral(author.karma).format('0.0a')} Karma
+                  {numeral(data?.karma).format('0.0a')} Karma
                 </span>
               </div>
             </div>
@@ -82,27 +84,31 @@ function View() {
           <div className="author-info-inner">
             <div className="image-info-title">
               <span className="author-info-title">Image Info</span>
-              <span>{imgData.title}</span>
+              <span>{data?.title}</span>
             </div>
             <table>
               <tbody>
+                <tr>
+                  <td>Subreddit</td>
+                  <td>{data?.subreddit}</td>
+                </tr>
                 <tr>
                   <td>Date Posted</td>
                   <td> Sunday 24 JUN</td>
                 </tr>
                 <tr>
                   <td>Size</td>
-                  <td>{imgData.size}</td>
+                  <td>{data?.size}</td>
                 </tr>
                 <tr>
                   <td>Resoultion</td>
                   <td>
-                    {imgData.originRes.width} &#215; {imgData.originRes.height}
+                    {data?.originRes.width} &#215; {data?.originRes.height}
                   </td>
                 </tr>
                 <tr>
                   <td>Karma</td>
-                  <td>{numeral(imgData.rating).format('0,0')}</td>
+                  <td>{numeral(data?.rating).format('0,0')}</td>
                 </tr>
               </tbody>
             </table>
@@ -111,6 +117,21 @@ function View() {
       </div>
     </>
   );
+}
+
+
+export async function getServerSideProps({ query }) {
+  const { id } = query
+  const data = await getOneImage(id)
+
+
+
+  return {
+    props: {
+      data
+    }
+  }
+
 }
 
 export default View;
