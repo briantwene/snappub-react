@@ -9,8 +9,8 @@ function sortAspectRatios(aspectRatio) {
 }
 
 function createInputs(aspectArray) {
-  return aspectArray.map((res) => (
-    <div className="res">
+  return aspectArray.map((res, index) => (
+    <div className="res" key={index}>
       <label>
         <input type="radio" />
         {`${res.width} X ${res.height} ${

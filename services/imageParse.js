@@ -110,13 +110,12 @@ const extractor = (image) => {
   return new Promise(async (resolve) => {
     resolve({
       author: image.author,
-      avatar: await fetchInfo(image.author, 'avatar'),
+      id: image.id,
       pic: image.url,
       thumb: decode(image.preview.images[0].resolutions[0].url),
       title: image.title,
       rating: image.score,
       created_at: image.created_utc,
-      size: '2MB',
       originRes: await image_probe(image.url)
         .then(({ width, height }) => {
           return { width: width, height: height };

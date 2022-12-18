@@ -11,6 +11,15 @@ exports.fetchData = async (page, subreddit) => {
   const result = await axios
     .get(`https://www.reddit.com/r/${subreddit}.json?limit=75&after=${page}`)
     .then(({ data }) => data);
-  console.log(result.data);
+  console.log(result.data.children);
   return result;
 };
+
+
+exports.fetchOne = async (imageId) => {
+  const result = await axios
+    .get(`https://www.reddit.com/${imageId}.json`)
+    .then(({ data }) => data[0]);
+
+  return result;
+}
