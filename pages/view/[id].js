@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { getOneImage } from "../api/info"
-
+import { getOneImage } from '../api/info';
+import Link from 'next/link';
 import axios from 'axios';
 import numeral from 'numeral';
 import fileDownload from 'js-file-download';
@@ -9,32 +9,9 @@ import fileDownload from 'js-file-download';
 
 function View({ data }) {
 
-  console.log("view", data)
-  // const location = useLocation();
-  // const data = location.state.data;
-  // const [data, setdata] = useState({});
 
-  // const fetchdata = () => {
-  //   axios
-  //     .get('/info/data', { params: { data: data.data } })
-  //     .then(({ data }) => setdata(data));
-  // };
 
-  const downloadRequest = () => {
-    axios
-      .get('/download/image', {
-        params: { url: data.pic, title: data.title },
-        responseType: 'blob',
-      })
-      .then(({ data, headers }) => {
-        fileDownload(data, headers.imgfilename);
-      });
-  };
 
-  // useEffect(() => {
-  //   fetchdata();
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, []);
   return (
     <>
       <div className="view-top">
@@ -48,8 +25,10 @@ function View({ data }) {
         </div>
 
         <div className="view-top-download">
-          <button className="download-btn" onClick={downloadRequest}>
-            Download
+          <button className="download-btn">
+            <Link href={`/api/download?title=${data.title}&url=${data.url}`}>
+              Download
+            </Link>
           </button>
           {/* <span className="view-download-dropdown download-link">
             <p>
@@ -119,19 +98,15 @@ function View({ data }) {
   );
 }
 
-
 export async function getServerSideProps({ query }) {
-  const { id } = query
-  const data = await getOneImage(id)
-
-
+  const { id } = query;
+  const data = await getOneImage(id);
 
   return {
     props: {
-      data
-    }
-  }
-
+      data,
+    },
+  };
 }
 
 export default View;
