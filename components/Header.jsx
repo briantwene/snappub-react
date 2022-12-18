@@ -11,9 +11,9 @@ function Header() {
   const subredditOption = UseSubredditOptions();
 
   const setSubredditBanner = useSubredditStore(
-    (state) => state.setSubredditBanner
+    (state) => state?.setSubredditBanner
   );
-  const changeSubreddit = useSubredditStore((state) => state.changeSubreddit);
+  const changeSubreddit = useSubredditStore((state) => state?.changeSubreddit);
 
   const handleChange = (selectedOption) => {
     changeSubreddit(selectedOption.value);

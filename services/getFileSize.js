@@ -2,7 +2,7 @@ const axios = require('axios');
 const bytes = require('bytes');
 
 export const getFileSize = async (url) => {
-  fileSize = await axios
+  const fileSize = await axios
     .head(url)
     .then((data) => {
       return data.headers['content-length'];
