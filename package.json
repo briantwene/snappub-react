@@ -28,13 +28,8 @@
     "build": "next build",
     "start": "next start",
     "test-ci": "jest --ci",
-    "sass": "sass src/Sass:src/Css --watch --no-source-map"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
+    "sass": "sass src/Sass:src/Css --watch --no-source-map",
+    "lint": "next lint"
   },
   "browserslist": {
     "production": [
@@ -52,6 +47,7 @@
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "eslint": "^8.30.0",
+    "eslint-config-next": "13.0.7",
     "jest": "^29.3.1",
     "jest-environment-jsdom": "^29.3.1"
   }
