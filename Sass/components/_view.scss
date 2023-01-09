@@ -74,6 +74,7 @@
   height: 100%;
   position: relative !important;
   object-fit: cover;
+  transition: all 0.5s;
 
   &-loading {
     @extend .image;
