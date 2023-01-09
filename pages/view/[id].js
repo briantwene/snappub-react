@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { getOneImage } from '../api/info';
+
+import { getOneImage } from "../api/info"
+import Image from "next/image";
 import Link from 'next/link';
+
 import axios from 'axios';
 import numeral from 'numeral';
 import fileDownload from 'js-file-download';
@@ -18,7 +21,8 @@ function View({ data }) {
         <div className="view-top-info">
           <div className="view-top-title">{data?.title}</div>
           <div className="view-top-poster">
-            <img alt="avatar" className="view-top-avatar" src={data?.avatar} />
+            <Image width="32"
+              height="32" alt="avatar" className="view-top-avatar" src={data?.avatar} />
 
             <div className="view-top-name">{data?.author}</div>
           </div>
@@ -38,14 +42,16 @@ function View({ data }) {
         </div>
       </div>
       <div className="view-image">
-        <img alt={data?.title} class="image" src={data?.url} />
+        <Image alt={data?.title} class="image" fill src={data?.url} />
       </div>
       <div className="view-info">
         <div className="author-info infobox">
           <div className="author-info-inner">
             <div className="author-info-title">Author</div>
             <div className="author-info-content">
-              <img
+              <Image
+                width="50"
+                height="50"
                 alt={data?.author}
                 className="view-author-img"
                 src={data?.avatar}

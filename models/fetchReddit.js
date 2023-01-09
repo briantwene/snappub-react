@@ -9,7 +9,7 @@ const fs = require('fs/promises');
 //for Top 100 Hot posts in r/wallpaper subreddit
 exports.fetchData = async (page, subreddit) => {
   const result = await axios
-    .get(`https://www.reddit.com/r/${subreddit}.json?limit=75&after=${page}`)
+    .get(`https://www.reddit.com/r/${subreddit}.json?limit=85&after=${page}`)
     .then(({ data }) => data);
   console.log(result.data.children);
   return result;

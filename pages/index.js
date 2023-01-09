@@ -5,6 +5,7 @@ import ImageRenderer from '../components/ImageRenderer';
 import { useQuery } from 'react-query';
 import * as RiIcons from 'react-icons/ri';
 import { useSubredditStore } from '../utils/store';
+import Image from 'next/image';
 
 function Home() {
   //declare page state variable
@@ -51,7 +52,8 @@ function Home() {
       <div
         className={`gallery-title-overlay${subredditBanner ? '' : '-noBanner'}`}
       >
-        <img src={subredditBanner} alt="" className="image-overlay" />
+        {subredditBanner && <Image src={subredditBanner} priority alt="" fill className="image-overlay" />}
+
 
         <h1 className={`title${subredditBanner ? '' : '-noBanner'}`}>
           r/

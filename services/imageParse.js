@@ -3,6 +3,7 @@
 const image_probe = require('probe-image-size');
 const { fetchData } = require('../models/fetchReddit');
 const { fetchInfo } = require('./fetchInfo');
+import { getPlaiceholder } from 'plaiceholder';
 import getFileSize from './getFileSize';
 const { decode } = require('html-entities');
 const skipKeywords = ['gallery', 'imgur.com/a/', 'www.reddit.com/r/'];
@@ -112,7 +113,7 @@ const extractor = (image) => {
       author: image.author,
       id: image.id,
       pic: image.url,
-      thumb: decode(image.preview.images[0].resolutions[0].url),
+      thumb: await getPlaiceholder(decode(image.preview.images[0].resolutions[0].url)).then(({ base64 }) => base64),
       title: image.title,
       rating: image.score,
       created_at: image.created_utc,

@@ -6,6 +6,7 @@ import React from 'react';
 import Select from 'react-select';
 import UseSubredditOptions from '../hooks/UseSubredditOptions';
 import { useSubredditStore } from '../utils/store';
+import Image from 'next/image';
 
 function Header() {
   const subredditOption = UseSubredditOptions();
@@ -21,11 +22,13 @@ function Header() {
   };
   const defaultVal = {
     icon: (
-      <img
+      <Image
         src={
           'https://a.thumbs.redditmedia.com/APweUko3qLJ0prsQI1giluMwBdcVnokw9_yZcby4SB8.png'
         }
         alt={'wallpaper'}
+        height="32"
+        width="32"
         className="subreddit-icon"
       />
     ),
