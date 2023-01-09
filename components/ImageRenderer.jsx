@@ -12,7 +12,13 @@ function ImageRenderer({ image, key }) {
   return (
     <div className="img-info">
       <div className="author">
-        <img className="avatar" src={avatar} alt={avatar} />
+        <Image
+          width="32"
+          height="32"
+          className="avatar"
+          src={avatar}
+          alt={avatar}
+        />
         <span>u/{author}</span>
       </div>
       <AspectRatio

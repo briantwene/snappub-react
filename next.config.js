@@ -15,6 +15,10 @@ module.exports = withPlaiceholder({
             {
                 protocol: "https",
                 hostname: "a.thumbs.redditmedia.com"
+            },
+            {
+                protocol: "https",
+                hostname: "www.redditstatic.com"
             }
         ],
     },

@@ -52,7 +52,8 @@ function Home() {
       <div
         className={`gallery-title-overlay${subredditBanner ? '' : '-noBanner'}`}
       >
-        <Image src={subredditBanner || ""} priority alt="" fill className="image-overlay" />
+        {subredditBanner && <Image src={subredditBanner} priority alt="" fill className="image-overlay" />}
+
 
         <h1 className={`title${subredditBanner ? '' : '-noBanner'}`}>
           r/
