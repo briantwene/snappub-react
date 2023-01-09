@@ -1,6 +1,6 @@
 import { QueryClientProvider, QueryClient } from "react-query"
 import MainLayout from "../components/mainLayout"
-import "../Css/App.css"
+import "../Sass/App.scss"
 
 const queryClient = new QueryClient();
 

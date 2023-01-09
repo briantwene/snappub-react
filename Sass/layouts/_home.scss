@@ -10,10 +10,6 @@
     background: none;
   }
 
-  .image-overlay {
-    object-fit: cover;
-    opacity: 0.4;
-  }
   .title {
     display: inline;
     font-size: em(28);
@@ -35,6 +31,12 @@
       color: black;
     }
   }
+}
+
+.image-overlay {
+  position: relative !important;
+  object-fit: cover;
+  opacity: 0.4;
 }
 
 .gallery-title {

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { getOneImage } from "../api/info"
+import Image from "next/image";
 
 import axios from 'axios';
 import numeral from 'numeral';
@@ -59,7 +60,7 @@ function View({ data }) {
         </div>
       </div>
       <div className="view-image">
-        <img alt={data?.title} class="image" src={data?.url} />
+        <Image alt={data?.title} class="image" fill src={data?.url} />
       </div>
       <div className="view-info">
         <div className="author-info infobox">
