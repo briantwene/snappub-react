@@ -42,7 +42,7 @@ function ImageRenderer({ image, key }) {
         </Link>
       </AspectRatio>
       <div className="mobile-res">
-        {`${image.originRes.height}`} &#10005; {`${image.originRes.width}`}
+        {`${image.originRes?.height}`} &#10005; {`${image.originRes?.width}`}
       </div>
     </div>
   );

@@ -162,7 +162,7 @@ export const getImageData = async (page, subreddit) => {
       return {
         next: result.data.after,
         prev: result.data.before,
-        data: await extractImages(postData),
+        images: await extractImages(postData),
       };
     })
     .catch((e) => {
