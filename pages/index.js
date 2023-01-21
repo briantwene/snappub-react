@@ -1,17 +1,16 @@
 import axios from 'axios';
 
-
 import ImageRenderer from '../components/ImageRenderer';
 import { useInfiniteQuery, useQuery } from '@tanstack/react-query';
 import * as RiIcons from 'react-icons/ri';
 import { useSubredditStore } from '../utils/store';
 import Image from 'next/image';
-import { useInView } from "react-intersection-observer"
-import { useEffect } from 'react';
+import { useInView } from 'react-intersection-observer';
+import React, { useEffect } from 'react';
 
 function Home() {
   //declare page state variable
-  const { ref, inView } = useInView()
+  const { ref, inView } = useInView();
 
   const currentSubreddit = useSubredditStore(
     (state) => state?.current_subreddit
@@ -28,14 +27,22 @@ function Home() {
   //   return false;
   // };
 
-  const { data, error, fetchNextPage, hasNextPage, isFetching, isFetchingNextPage, status } = useInfiniteQuery({
+  const {
+    data,
+    error,
+    fetchNextPage,
+    hasNextPage,
+    isFetching,
+    isFetchingNextPage,
+    status,
+  } = useInfiniteQuery({
     queryKey: [currentSubreddit],
     queryFn: fetchImages,
-    getNextPageParam: (lastPage) => lastPage.next ?? undefined
+    getNextPageParam: (lastPage) => lastPage.next ?? undefined,
   });
 
   async function fetchImages({ pageParam }) {
-    console.log("pageParam", pageParam)
+    console.log('pageParam', pageParam);
     const { data } = await axios.get(`/api/images`, {
       params: { page: pageParam, subreddit: currentSubreddit },
     });
@@ -43,21 +50,26 @@ function Home() {
     return data;
   }
 
-
-
   useEffect(() => {
     if (inView) {
-      fetchNextPage()
+      fetchNextPage();
     }
-  }, [inView])
+  }, [inView]);
 
   return (
     <>
       <div
         className={`gallery-title-overlay${subredditBanner ? '' : '-noBanner'}`}
       >
-        {subredditBanner && <Image src={subredditBanner} priority alt="" fill className="image-overlay" />}
-
+        {subredditBanner && (
+          <Image
+            src={subredditBanner}
+            priority
+            alt=""
+            fill
+            className="image-overlay"
+          />
+        )}
 
         <h1 className={`title${subredditBanner ? '' : '-noBanner'}`}>
           r/
@@ -68,54 +80,26 @@ function Home() {
       </div>
       {/* <Filter /> */}
       <div className="photo_grid">
-        {status === "loading"
+        {status === 'loading'
           ? 'LOADING....'
-          : status === "error"
+          : status === 'error'
             ? `Error: ${error.message}`
-
             : data.pages.map((group, key) => (
-              <>
+
+              <React.Fragment key={key}>
+
                 {group.images?.map((image) => (
-                  <ImageRenderer image={image} key={key} />)
-                )}
-              </>
-            )
+                  <ImageRenderer image={image} key={image.id} />
+                ))}
 
-            )}
-        < div  >
-        </div>
-
-
+              </React.Fragment>
+            ))}
+        <div></div>
       </div>
-      <div>
-        <button
-          ref={ref}
-          onClick={() => fetchNextPage()}
-          disabled={!hasNextPage || isFetchingNextPage}
-        >
-          {isFetchingNextPage
-            ? 'Loading more...'
-            : hasNextPage
-              ? 'Load Newer'
-              : 'Nothing more to load'}
-        </button></div>
-      {/* <div className="pagination-container">
-        <button
-          className="pagination-btn"
-          onClick={decrementPage}
-          disabled={page === 0}
-        >
-          <RiIcons.RiArrowDropLeftLine />
-        </button>
-        <span>{page + 1}</span>
-        <button
-          className="pagination-btn"
-          onClick={incrementPage}
-          disabled={lastPage()}
-        >
-          <RiIcons.RiArrowDropRightLine />
-        </button>
-      </div> */}
+      <div ref={ref} className={!hasNextPage ? 'hidden' : ''}>
+        {isFetchingNextPage ? 'Loading more...' : ''}
+      </div>
+
     </>
   );
 }
