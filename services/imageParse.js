@@ -112,6 +112,7 @@ const extractor = (image) => {
     resolve({
       author: image.author,
       id: image.id,
+      avatar: await fetchInfo(null, image.author),
       pic: image.url,
       thumb: await getPlaiceholder(decode(image.preview.images[0].resolutions[0].url)).then(({ base64 }) => base64),
       title: image.title,
@@ -162,7 +163,7 @@ export const getImageData = async (page, subreddit) => {
       return {
         next: result.data.after,
         prev: result.data.before,
-        data: await extractImages(postData),
+        images: await extractImages(postData),
       };
     })
     .catch((e) => {

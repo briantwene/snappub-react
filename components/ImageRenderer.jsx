@@ -6,18 +6,18 @@ import ProgressiveImg from 'react-progressive-graceful-image';
 import Image from 'next/image';
 
 function ImageRenderer({ image, key }) {
-  const { pic, thumb, author, avatar, id } = image;
+  const { pic, thumb, author, avatar, id, title } = image;
   const [loaded, setLoaded] = useState(false);
 
   return (
     <div className="img-info">
       <div className="author">
         <Image
+          alt={author}
           width="32"
           height="32"
           className="avatar"
           src={avatar}
-          alt={avatar}
         />
         <span>u/{author}</span>
       </div>
@@ -26,7 +26,7 @@ function ImageRenderer({ image, key }) {
       >
         <Link href={`/view/${id}`} state={{ data: image }}>
           <Image
-            alt={author}
+            alt={title}
             src={pic}
             className="image"
             placeholder="blur"
@@ -42,7 +42,7 @@ function ImageRenderer({ image, key }) {
         </Link>
       </AspectRatio>
       <div className="mobile-res">
-        {`${image.originRes.height}`} &#10005; {`${image.originRes.width}`}
+        {`${image.originRes?.height}`} &#10005; {`${image.originRes?.width}`}
       </div>
     </div>
   );

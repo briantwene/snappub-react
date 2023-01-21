@@ -15,6 +15,8 @@ function View({ data }) {
 
 
 
+
+
   return (
     <>
       <div className="view-top">
@@ -79,7 +81,7 @@ function View({ data }) {
                 </tr>
                 <tr>
                   <td>Date Posted</td>
-                  <td> Sunday 24 JUN</td>
+                  <td>{new Date(data?.created_at).toDateString()}</td>
                 </tr>
                 <tr>
                   <td>Size</td>
@@ -116,3 +118,5 @@ export async function getServerSideProps({ query }) {
 }
 
 export default View;
+
+
