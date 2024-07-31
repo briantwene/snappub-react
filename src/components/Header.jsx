@@ -1,12 +1,16 @@
 // #Filename: Header.jsx
 // #Author: Brian Twene (@bt521)
-// #Date:12/12/21
-import React from 'react';
 
+// #Date:12/12/21
+
+'use client';
+import React from 'react';
+import '../Sass/App.scss';
 import Select from 'react-select';
 import UseSubredditOptions from '../hooks/UseSubredditOptions';
 import { useSubredditStore } from '../utils/store';
 import Image from 'next/image';
+import { SignOutButton } from '../components/RedditButton';
 
 function Header() {
   const subredditOption = UseSubredditOptions();
@@ -57,6 +61,7 @@ function Header() {
           )}
         />
       </div>
+      <SignOutButton />
     </div>
   );
 }

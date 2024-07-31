@@ -1,6 +1,6 @@
 "use strict"
 
-import { fetchInfo } from "../../services/fetchInfo";
+import { fetchInfo } from "../../../services/fetchInfo";
 
 export default async function info(req, res) {
     const { imageId } = req.query;

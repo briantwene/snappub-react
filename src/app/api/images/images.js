@@ -1,6 +1,6 @@
 'use strict';
 //import needed function
-import { getImageData } from '../../services/imageParse';
+import { getImageData } from '../../../services/imageParse';
 
 import { auth } from '@/auth';
 

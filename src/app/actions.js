@@ -1,6 +1,10 @@
 'use server';
-import { signIn } from '../auth';
+import { signIn, signOut } from '../auth';
 
 export async function signInWithReddit() {
-  return await signIn();
+  return await signIn('reddit', { redirectTo: '/app' });
+}
+
+export async function signOutofReddit() {
+  return await signOut({ redirectTo: '/' });
 }
