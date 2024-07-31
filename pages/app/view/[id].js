@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-import { getOneImage } from "../api/info"
+import { getOneImage } from "../../api/info"
 import Image from "next/image";
 import Link from 'next/link';
 
