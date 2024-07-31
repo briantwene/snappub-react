@@ -1,7 +1,8 @@
+'use client';
 import React, { useEffect, useState } from 'react';
 
-import { getOneImage } from "../../api/info"
-import Image from "next/image";
+import { getOneImage } from '../../../api/info';
+import Image from 'next/image';
 import Link from 'next/link';
 
 import axios from 'axios';
@@ -11,20 +12,19 @@ import fileDownload from 'js-file-download';
 //will go to the view page
 
 function View({ data }) {
-
-
-
-
-
-
   return (
     <>
       <div className="view-top">
         <div className="view-top-info">
           <div className="view-top-title">{data?.title}</div>
           <div className="view-top-poster">
-            <Image width="32"
-              height="32" alt="avatar" className="view-top-avatar" src={data?.avatar} />
+            <Image
+              width="32"
+              height="32"
+              alt="avatar"
+              className="view-top-avatar"
+              src={data?.avatar}
+            />
 
             <div className="view-top-name">{data?.author}</div>
           </div>
@@ -118,5 +118,3 @@ export async function getServerSideProps({ query }) {
 }
 
 export default View;
-
-

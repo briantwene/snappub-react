@@ -3,7 +3,7 @@ const express = require('express');
 const app = express();
 const api = require('./routes/api.js');
 const download = require('./routes/download.js');
-const info = require('./routes/info');
+const info = require('./routes/info.js');
 const path = require('path');
 
 const port = process.env.PORT || 3001;
