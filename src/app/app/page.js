@@ -1,5 +1,5 @@
 'use client';
-// // import axios from 'axios';
+import axios from 'axios';
 
 import AccessDenied from '../../components/AccessDenied';
 import { useSession } from 'next-auth/react';
@@ -69,8 +69,6 @@ function Home() {
 
   const { data: session } = useSession();
 
-  console.log('session', session);
-
   if (!session) {
     return <AccessDenied />;
   }
@@ -104,11 +102,11 @@ function Home() {
           : status === 'error'
           ? `Error: ${error.message}`
           : data.pages.map((group, key) => (
-              <React.Fragment key={key}>
+              <>
                 {group.images?.map((image) => (
                   <ImageRenderer image={image} key={image.id} />
                 ))}
-              </React.Fragment>
+              </>
             ))}
         <div></div>
       </div>

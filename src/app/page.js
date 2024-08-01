@@ -6,7 +6,6 @@ import Link from 'next/link';
 
 const Home = async () => {
   const session = await auth();
-  console.log('session', session);
   return (
     <div>
       Home
