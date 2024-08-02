@@ -1,7 +1,6 @@
-import React from "react";
-import { ReactComponent as LoadingIcon } from "./loading.svg";
+import React from 'react';
 
-function Loading() {
+export const Loading: React.FC = () => {
   return (
     <div className="loading-container">
       <div className="svg-container">
@@ -48,6 +47,6 @@ function Loading() {
       <div className="loading-text">LOADING...</div>
     </div>
   );
-}
+};
 
 export default Loading;

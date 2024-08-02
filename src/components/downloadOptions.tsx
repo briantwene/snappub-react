@@ -1,4 +1,7 @@
+// TODO: Change  when component is going to be used, its bad
+// @ts-nocheck
 import React from 'react';
+import { decode } from 'html-entities';
 
 function sortAspectRatios(aspectRatio) {
   return function (element) {
@@ -7,6 +10,8 @@ function sortAspectRatios(aspectRatio) {
     }
   };
 }
+
+type aspectRatio = {};
 
 function createInputs(aspectArray) {
   return aspectArray.map((res, index) => (
@@ -21,14 +26,19 @@ function createInputs(aspectArray) {
   ));
 }
 
-function DownloadOptions(props) {
-  const twentyOneNine = props.res.filter(sortAspectRatios('21:9'));
+
+interface DownlaodOptionsProps {
+  res: any;
+}
+
+export const DownloadOptions: React.FC<DownlaodOptionsProps> = ({ res }) => {
+  const twentyOneNine = res.filter(sortAspectRatios('21:9'));
   const twentyOneNineArray = createInputs(twentyOneNine);
-  const sixteenNine = props.res.filter(sortAspectRatios('16:9'));
+  const sixteenNine = res.filter(sortAspectRatios('16:9'));
   const sixteenNineArray = createInputs(sixteenNine);
-  const sixteenTen = props.res.filter(sortAspectRatios('16:10'));
+  const sixteenTen = res.filter(sortAspectRatios('16:10'));
   const sixteenTenArray = createInputs(sixteenTen);
-  const fourThree = props.res.filter(sortAspectRatios('4:3'));
+  const fourThree = res.filter(sortAspectRatios('4:3'));
   const fourThreeArray = createInputs(fourThree);
 
   return (
@@ -70,6 +80,4 @@ function DownloadOptions(props) {
       </div>
     </>
   );
-}
-
-export default DownloadOptions;
+};

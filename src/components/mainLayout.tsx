@@ -1,7 +1,11 @@
 import Header from './Header';
 import Footer from './Footer';
 
-export default function MainLayout({ children }) {
+interface MainLayoutProps {
+  children: React.ReactNode;
+}
+
+export const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
   return (
     <>
       <Header />
@@ -11,4 +15,4 @@ export default function MainLayout({ children }) {
       </div>
     </>
   );
-}
+};

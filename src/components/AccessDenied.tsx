@@ -2,7 +2,7 @@ import React from 'react';
 import { signIn } from 'next-auth/react';
 import Link from 'next/link';
 
-const AccessDenied = () => {
+const AccessDenied: React.FC = () => {
   return (
     <>
       <h1>WOMP WOMP</h1>

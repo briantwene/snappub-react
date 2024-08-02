@@ -3,12 +3,22 @@
 // #Date:11/12/21
 import React from "react";
 
-function Button(props) {
+interface ButtonProps {
+  label: string;
+  className: string;
+  handleClick: () => void;
+}
+
+export const Button: React.FC<ButtonProps> = ({
+  className,
+  label,
+  handleClick,
+}) => {
   return (
-    <button className={props.className} onClick={props.handleClick}>
-      {props.label}
+    <button className={className} onClick={handleClick}>
+      {label}
     </button>
   );
-}
+};
 
 export default Button;

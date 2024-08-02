@@ -2,6 +2,7 @@
 import React from 'react';
 import { useQuery } from '@tanstack/react-query';
 import ImageRenderer from './ImageRenderer';
+import { Wallpaper, WallpaperResponse } from '../models/Wallpaper';
 
 const fetchImages = async () => {
   const pageParam = '';
@@ -17,11 +18,11 @@ const fetchImages = async () => {
     console.log(res);
     throw new Error(`${res.status} - ${res.statusText}`);
   }
-  const data = await res.json();
+  const data: WallpaperResponse = await res.json();
   return data;
 };
 
-const InfiniteList = () => {
+const InfiniteList: React.FC = () => {
   const { isPending, isError, data, error } = useQuery({
     queryKey: ['wallpapers'],
     queryFn: fetchImages,
@@ -32,7 +33,7 @@ const InfiniteList = () => {
 
   return (
     <div className="photo_grid">
-      {data?.images?.map((image) => (
+      {data?.images?.map((image: Wallpaper) => (
         <ImageRenderer image={image} key={image.id} />
       ))}
       <div></div>
