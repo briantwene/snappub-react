@@ -6,9 +6,14 @@ import { AspectRatio } from 'react-aspect-ratio';
 import Link from 'next/link';
 import ProgressiveImg from 'react-progressive-graceful-image';
 import Image from 'next/image';
+import { Wallpaper } from '../models/Wallpaper';
 
-function ImageRenderer({ image, key }) {
-  const { pic, thumb, author, avatar, id, title } = image;
+interface ImageRendererProps {
+  image: Wallpaper;
+}
+
+export const ImageRenderer: React.FC<ImageRendererProps> = ({ image }) => {
+  const { src, thumb, author, avatar, id, title } = image;
   const [loaded, setLoaded] = useState(false);
 
   return (
@@ -24,30 +29,31 @@ function ImageRenderer({ image, key }) {
         <span>u/{author}</span>
       </div>
       <AspectRatio
-        ratio={`${image.originRes?.width}/${image.originRes?.height}`}
+        ratio={`${image.resolution?.width}/${image.resolution?.height}`}
       >
         <Link href={`/app/view/${id}`} state={{ data: image }}>
           <Image
             alt={title}
-            src={pic}
+            src={src}
             className="image"
             placeholder="blur"
             blurDataURL={thumb}
             layout="fill"
-            lassName={`image-${loaded ? 'loading' : 'loaded'}`}
+            className={`image-${loaded ? 'loading' : 'loaded'}`}
             onLoadingComplete={() => setLoaded(true)}
           />
 
           <div className="resolution">
-            {`${image.originRes.height}`} &#10005; {`${image.originRes.width}`}
+            {`${image?.resolution?.height}`} &#10005;{' '}
+            {`${image?.resolution?.width}`}
           </div>
         </Link>
       </AspectRatio>
       <div className="mobile-res">
-        {`${image.originRes?.height}`} &#10005; {`${image.originRes?.width}`}
+        {`${image.resolution?.height}`} &#10005; {`${image.resolution?.width}`}
       </div>
     </div>
   );
-}
+};
 
 export default ImageRenderer;

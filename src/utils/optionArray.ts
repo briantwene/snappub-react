@@ -1,7 +1,6 @@
-
-import axios from 'axios';
 import { decode } from 'html-entities';
-const subreddits = [
+
+const subreddits: string[] = [
   'wallpaper',
   'MobileWallpaper',
   'iphonewallpapers',
@@ -21,21 +20,21 @@ const subreddits = [
 async function optionArray() {
   let promises = [];
 
-  const getPfp = async (subreddit) => {
-    const info = await axios
-      .get(`https://www.reddit.com/r/${subreddit}/about.json`)
-      .then(({ data: { data } }) => {
-        return {
-          icon:
-            data.icon_img ||
-            'https://www.redditstatic.com/avatars/avatar_default_02_A5A4A4.png',
+  const getPfp = async (subreddit: string) => {
+    const response = await fetch(
+      `https://www.reddit.com/r/${subreddit}/about.json`
+    );
 
-          banner: decode(data.banner_background_image),
-          name: subreddit,
-        };
-      });
+    const info = await response.json();
+    const result = {
+      icon:
+        info.data.icon_img ||
+        'https://www.redditstatic.com/avatars/avatar_default_02_A5A4A4.png',
+      banner: decode(info.data.banner_background_image),
+      name: subreddit,
+    };
 
-    return info;
+    return result;
   };
 
   for (const subreddit of subreddits) {

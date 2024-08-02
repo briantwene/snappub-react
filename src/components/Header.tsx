@@ -6,36 +6,40 @@
 'use client';
 import React from 'react';
 import '../Sass/App.scss';
-import Select from 'react-select';
-import UseSubredditOptions from '../hooks/UseSubredditOptions';
+import Select, {
+  ActionMeta,
+  MultiValue,
+  OnChangeValue,
+  SingleValue,
+} from 'react-select';
+import useSubredditOptions from '../hooks/UseSubredditOptions';
 import { useSubredditStore } from '../utils/store';
 import Image from 'next/image';
 import { SignOutButton } from '../components/RedditButton';
+import SubbreditSelect from '../components/SubredditSelect';
+import { Subreddit } from '../models/Subreddit';
 
-function Header() {
-  const subredditOption = UseSubredditOptions();
+export const Header: React.FC = () => {
+  const subredditOption = useSubredditOptions();
 
   const setSubredditBanner = useSubredditStore(
     (state) => state?.setSubredditBanner
   );
   const changeSubreddit = useSubredditStore((state) => state?.changeSubreddit);
 
-  const handleChange = (selectedOption) => {
-    changeSubreddit(selectedOption.value);
-    setSubredditBanner(selectedOption.banner);
+  const handleChange = (
+    selectedOption: OnChangeValue<Subreddit, false>,
+    actionMeta: ActionMeta<Subreddit>
+  ) => {
+    console.log('SelectedOptions', selectedOption);
+
+    if (selectedOption !== null) {
+      changeSubreddit(selectedOption?.value);
+      setSubredditBanner(selectedOption?.banner);
+    }
   };
-  const defaultVal = {
-    icon: (
-      <Image
-        src={
-          'https://a.thumbs.redditmedia.com/APweUko3qLJ0prsQI1giluMwBdcVnokw9_yZcby4SB8.png'
-        }
-        alt={'wallpaper'}
-        height="32"
-        width="32"
-        className="subreddit-icon"
-      />
-    ),
+  const defaultVal: Subreddit = {
+    icon: 'https://a.thumbs.redditmedia.com/APweUko3qLJ0prsQI1giluMwBdcVnokw9_yZcby4SB8.png',
     banner:
       'https://styles.redditmedia.com/t5_2qmjl/styles/bannerBackgroundImage_2qok6gpoiud71.png?width=4000&s=6b7f7b1846d648c37b4c12393a8ba2fe067300ca',
     value: 'wallpaper',
@@ -47,23 +51,15 @@ function Header() {
         <span className="snap-logo">Snap-Pub</span>
       </div>
       <div className="dropdown">
-        <Select
+        <SubbreditSelect
           options={subredditOption}
-          defaultValue={defaultVal}
-          isSearchable={false}
-          onChange={handleChange}
-          autoFocus={true}
-          getOptionLabel={(e) => (
-            <div className="dropdown-label">
-              {e.icon}
-              <span className="dropdown-label-text">{e.label}</span>
-            </div>
-          )}
+          defaultVal={defaultVal}
+          handleChange={handleChange}
         />
       </div>
       <SignOutButton />
     </div>
   );
-}
+};
 
 export default Header;

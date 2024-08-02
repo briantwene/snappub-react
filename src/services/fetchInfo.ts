@@ -1,6 +1,6 @@
 const axios = require('axios');
 const image_probe = require('probe-image-size');
-const { fetchOne } = require('../models/fetchReddit');
+import fetchOne from '../models/fetchReddit';
 const { defaultImageGenerator } = require('./defaultImageGenerator');
 const { getFileSize } = require('./getFileSize');
 

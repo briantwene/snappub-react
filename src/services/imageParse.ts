@@ -17,12 +17,14 @@ const extractor = (image) => {
       author: image.author,
       id: image.id,
       avatar: await fetchInfo(null, image.author),
-      pic: image.url,
-      thumb: await getPlaiceholder(decode(image.preview.images[0].resolutions[0].url)).then(({ base64 }) => base64),
+      src: image.url,
+      thumb: await getPlaiceholder(
+        decode(image.preview.images[0].resolutions[0].url)
+      ).then(({ base64 }) => base64),
       title: image.title,
       rating: image.score,
       created_at: image.created_utc,
-      originRes: await image_probe(image.url)
+      resolution: await image_probe(image.url)
         .then(({ width, height }) => {
           return { width: width, height: height };
         })

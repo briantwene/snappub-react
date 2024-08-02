@@ -1,33 +1,30 @@
 import React, { useState, useEffect } from 'react';
 import optionArray from '../utils/optionArray';
+import { Subreddit } from '../models/Subreddit';
 
-function UseSubredditOptions() {
-  const [optionResults, setOptionResults] = useState([]);
+
+
+
+function useSubredditOptions(): Subreddit[] {
+  const [optionResults, setOptionResults] = useState<Subreddit[]>([]);
 
   useEffect(() => {
     optionArray().then((data) => {
-      setOptionResults(data);
+      const processedOptions = data.map((subreddit) => ({
+        value: subreddit.name,
+        label: `r/${subreddit.name.toLowerCase().endsWith('porn')
+          ? subreddit.name.toLowerCase().replace('porn', '****')
+          : subreddit.name
+          }`,
+        icon: subreddit.icon,
+        banner: subreddit.banner,
+      }));
+      setOptionResults(processedOptions);
     });
   }, []);
 
-  const subredditOptions = optionResults.map((subreddit) => {
-    return {
-      value: subreddit.name,
-      label: `r/${subreddit.name.toLowerCase().endsWith('porn')
-        ? subreddit.name.toLowerCase().replace('porn', '****')
-        : subreddit.name
-        }`,
-      icon: (
-        <img
-          src={subreddit.icon}
-          alt={subreddit.name}
-          className="subreddit-icon"
-        />
-      ),
-      banner: subreddit.banner,
-    };
-  });
-  return subredditOptions;
+  return optionResults;
 }
 
-export default UseSubredditOptions;
+export default useSubredditOptions;
+
