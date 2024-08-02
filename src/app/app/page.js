@@ -10,6 +10,7 @@ import * as RiIcons from 'react-icons/ri';
 import { useSubredditStore } from '../../utils/store';
 import Image from 'next/image';
 import { useInView } from 'react-intersection-observer';
+import InfiniteList from '../../components/InfiniteList';
 // import React, { useEffect } from 'react';
 
 function Home() {
@@ -38,28 +39,28 @@ function Home() {
   // //   return false;
   // // };
 
-  const {
-    data,
-    error,
-    fetchNextPage,
-    hasNextPage,
-    isFetching,
-    isFetchingNextPage,
-    status,
-  } = useInfiniteQuery({
-    queryKey: [currentSubreddit],
-    queryFn: fetchImages,
-    getNextPageParam: (lastPage) => lastPage.next ?? undefined,
-  });
+  // const {
+  //   data,
+  //   error,
+  //   fetchNextPage,
+  //   hasNextPage,
+  //   isFetching,
+  //   isFetchingNextPage,
+  //   status,
+  // } = useInfiniteQuery({
+  //   queryKey: [currentSubreddit],
+  //   queryFn: fetchImages,
+  //   getNextPageParam: (lastPage) => lastPage.next ?? undefined,
+  // });
 
-  async function fetchImages({ pageParam }) {
-    console.log('pageParam', pageParam);
-    const { data } = await axios.get(`/api/images`, {
-      params: { page: pageParam, subreddit: currentSubreddit },
-    });
-    if (!data) throw new Error('there was an error in fetching image data');
-    return data;
-  }
+  // async function fetchImages({ pageParam }) {
+  //   console.log('pageParam', pageParam);
+  //   const { data } = await axios.get(`/api/images`, {
+  //     params: { page: pageParam, subreddit: currentSubreddit },
+  //   });
+  //   if (!data) throw new Error('there was an error in fetching image data');
+  //   return data;
+  // }
 
   // useEffect(() => {
   //   if (inView) {
@@ -97,22 +98,12 @@ function Home() {
       </div>
       {/* <Filter /> */}
       <div className="photo_grid">
-        {status === 'loading'
-          ? 'LOADING....'
-          : status === 'error'
-          ? `Error: ${error.message}`
-          : data.pages.map((group, key) => (
-              <>
-                {group.images?.map((image) => (
-                  <ImageRenderer image={image} key={image.id} />
-                ))}
-              </>
-            ))}
+        <InfiniteList />
         <div></div>
       </div>
-      <div ref={ref} className={!hasNextPage ? 'hidden' : ''}>
+      {/* <div ref={ref} className={!hasNextPage ? 'hidden' : ''}>
         {isFetchingNextPage ? 'Loading more...' : ''}
-      </div>
+      </div> */}
     </>
   );
 }

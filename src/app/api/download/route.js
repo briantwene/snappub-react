@@ -1,7 +1,9 @@
 'use strict';
-const { requestImageStream } = require('../../../services/getImagestream');
-const path = require('path');
-const { auth } = require('@/auth');
+import { requestImageStream } from '../../../services/getImagestream';
+import path from 'path';
+import { auth } from '../../../auth';
+import { NextResponse } from 'next/server';
+import { headers } from 'next/headers';
 
 //object for holding the MIME types based on the image extension
 const ImageFormats = {
@@ -10,11 +12,16 @@ const ImageFormats = {
   '.gif': 'gif',
 };
 
-export async function GET(request, response) {
+export async function GET(request) {
   //extract the url and title of the image from query parameters
-  const { title, url } = request.query;
+  const headers = new Headers(request.headers);
+  const { searchParams } = new URL(request.url);
 
-  const session = await auth(request, response);
+  const title = searchParams.get('title');
+  const url = searchParams.get('url');
+
+  console.log('title', title, 'url', url);
+  const session = await auth();
 
   if (!session) {
     response.status(401).send('unauthorized');
@@ -31,13 +38,16 @@ export async function GET(request, response) {
   //set HTTP headers to let browser know its for downloading
   //Added a custom header to let the frontend
   //know the image format when downloading
-  response.setHeader(
+  headers.set(
     'Content-Disposition',
     `attachment; filename=${title}${extension}`
   );
-  response.setHeader('Content-Type', `image/${format}`);
+  headers.set('Content-Type', `image/${format}`);
 
-  response.send(imageStream.data);
+  return new NextResponse(imageStream.data, {
+    status: 200,
+    headers,
+  });
 }
 
 export const config = {

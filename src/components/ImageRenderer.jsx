@@ -26,7 +26,7 @@ function ImageRenderer({ image, key }) {
       <AspectRatio
         ratio={`${image.originRes?.width}/${image.originRes?.height}`}
       >
-        <Link href={`/view/${id}`} state={{ data: image }}>
+        <Link href={`/app/view/${id}`} state={{ data: image }}>
           <Image
             alt={title}
             src={pic}

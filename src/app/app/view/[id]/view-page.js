@@ -8,6 +8,7 @@ import numeral from 'numeral';
 //will go to the view page
 
 function ViewPage({ data }) {
+  console.log('data', data);
   return (
     <>
       <div className="view-top">
@@ -40,7 +41,7 @@ function ViewPage({ data }) {
         </div>
       </div>
       <div className="view-image">
-        <Image alt={data?.title} class="image" fill src={data?.url} />
+        <Image alt={data?.title} className="image" fill src={data?.url} />
       </div>
       <div className="view-info">
         <div className="author-info infobox">
