@@ -12,8 +12,8 @@ import Select, {
   OnChangeValue,
   SingleValue,
 } from 'react-select';
-import useSubredditOptions from '../hooks/UseSubredditOptions';
-import { useSubredditStore } from '../utils/store';
+import useSubredditOptions from '../hooks/useSubredditOptions';
+import { useAppStore } from '../utils/store';
 import Image from 'next/image';
 import { SignOutButton } from '../components/RedditButton';
 import SubbreditSelect from '../components/SubredditSelect';
@@ -22,15 +22,10 @@ import { Subreddit } from '../models/Subreddit';
 export const Header: React.FC = () => {
   const subredditOption = useSubredditOptions();
 
-  const setSubredditBanner = useSubredditStore(
-    (state) => state?.setSubredditBanner
-  );
-  const changeSubreddit = useSubredditStore((state) => state?.changeSubreddit);
+  const setSubredditBanner = useAppStore((state) => state?.setSubredditBanner);
+  const changeSubreddit = useAppStore((state) => state?.changeSubreddit);
 
-  const handleChange = (
-    selectedOption: OnChangeValue<Subreddit, false>,
-    actionMeta: ActionMeta<Subreddit>
-  ) => {
+  const handleChange = (selectedOption: OnChangeValue<Subreddit, false>) => {
     console.log('SelectedOptions', selectedOption);
 
     if (selectedOption !== null) {

@@ -1,6 +1,16 @@
 import React from 'react';
 
-function InfoBox(props) {
+
+interface InfoBoxProps {
+  title: string;
+  originRes: { width: number; height: number };
+  rating: number;
+  close: () => void;
+  author: string;
+  download: (link: string, title: string) => void;
+  link: string;
+}
+function InfoBox(props: Readonly<InfoBoxProps>) {
   return (
     <div className="box-info">
       <button className="close" onClick={() => props.close()}>

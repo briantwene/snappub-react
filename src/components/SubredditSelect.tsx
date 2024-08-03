@@ -1,11 +1,7 @@
 'use client';
 import React from 'react';
 import Select, {
-  ActionMeta,
-  MultiValue,
-  OnChangeValue,
   OptionProps,
-  SingleValue,
   components,
 } from 'react-select';
 import { Subreddit } from '../models/Subreddit';
@@ -14,6 +10,7 @@ import '../Sass/App.scss';
 interface SubredditSelectProps {
   options: Subreddit[];
   defaultVal: Subreddit;
+  //not ideal but for now any works here
   handleChange: (selectedOption: any) => void;
   //   getLabel: (subreddit: Subreddit) => React.ReactNode;
 }

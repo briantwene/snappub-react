@@ -50,8 +50,3 @@ export async function GET(request) {
   });
 }
 
-export const config = {
-  api: {
-    responseLimit: false,
-  },
-};

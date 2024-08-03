@@ -7,7 +7,7 @@ import { useSession } from 'next-auth/react';
 import ImageRenderer from '../../components/ImageRenderer';
 import { useInfiniteQuery, useQuery } from '@tanstack/react-query';
 import * as RiIcons from 'react-icons/ri';
-import { useSubredditStore } from '../../utils/store';
+import { useAppStore } from '../../utils/store';
 import Image from 'next/image';
 import { useInView } from 'react-intersection-observer';
 import InfiniteList from '../../components/InfiniteList';
@@ -18,15 +18,13 @@ function Home() {
   const { ref, inView } = useInView();
   // const { session, loading } = useSession();
 
-  const currentSubreddit = useSubredditStore(
-    (state) => state?.current_subreddit
-  );
-  const page = useSubredditStore((state) => state?.page);
-  const pageMap = useSubredditStore((state) => state?.pageMap);
-  const incrementPage = useSubredditStore((state) => state?.incrementPage);
-  const decrementPage = useSubredditStore((state) => state?.decrementPage);
-  const updatePageMap = useSubredditStore((state) => state?.updatePageMap);
-  const subredditBanner = useSubredditStore((state) => state?.subredditBanner);
+  const currentSubreddit = useAppStore((state) => state?.current_subreddit);
+  const page = useAppStore((state) => state?.page);
+  const pageMap = useAppStore((state) => state?.pageMap);
+  const incrementPage = useAppStore((state) => state?.incrementPage);
+  const decrementPage = useAppStore((state) => state?.decrementPage);
+  const updatePageMap = useAppStore((state) => state?.updatePageMap);
+  const subredditBanner = useAppStore((state) => state?.subredditBanner);
 
   // if (typeof window !== 'undefined' && loading) return null;
 
@@ -98,7 +96,7 @@ function Home() {
       </div>
       {/* <Filter /> */}
       <div className="photo_grid">
-        {/* <InfiniteList /> */}
+        <InfiniteList />
         <div></div>
       </div>
       {/* <div ref={ref} className={!hasNextPage ? 'hidden' : ''}>
