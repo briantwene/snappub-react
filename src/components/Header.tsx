@@ -12,7 +12,7 @@ import Select, {
   OnChangeValue,
   SingleValue,
 } from 'react-select';
-import useSubredditOptions from '../hooks/useSubredditOptions';
+import { useSubredditOptions } from '../hooks/useSubredditOptions';
 import { useAppStore } from '../utils/store';
 import Image from 'next/image';
 import { SignOutButton } from '../components/RedditButton';
