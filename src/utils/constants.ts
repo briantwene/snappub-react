@@ -1,4 +1,6 @@
-export const reso = [
+import { DetailedWallpaper } from '../models/reddit';
+
+export const DONWLOAD_RESOLUTIONS = [
   {
     width: 2560,
     height: 1080,
@@ -95,3 +97,18 @@ export const reso = [
     aspect: '4:3',
   },
 ];
+
+export const DEFAULT_DETAILED_WALLPAPER: DetailedWallpaper = {
+  id: 'unknown',
+  src: 'unknown',
+  author: 'unknown',
+  subreddit: 'unknown',
+  title: 'unknown',
+  created_at: 0,
+  rating: 0,
+  thumb: 'unknown',
+  metadata: { width: 0, height: 0, type: 'unknown', mime: 'unknown' },
+  size: '0B',
+  karma: 0,
+  avatar: 'unknown',
+};

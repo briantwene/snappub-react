@@ -4,9 +4,9 @@ import { getImageData } from '../../../services/imageParse';
 
 import { auth } from '../../../auth';
 
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 
-export async function GET(request) {
+export async function GET(request: NextRequest) {
   const session = await auth();
   const user = session?.user;
   console.log('session', session);
@@ -28,7 +28,7 @@ export async function GET(request) {
         { status: 404, statusText: 'Subreddit not found or page' }
       );
     }
-    let results = await getImageData(page, subreddit);
+    let results = await getImageData('', subreddit);
 
     //then send to the front end
     return NextResponse.json(results, { status: 200 });

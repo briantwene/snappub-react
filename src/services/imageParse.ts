@@ -1,16 +1,21 @@
 'use strict';
 //import modules and functions needed
-const image_probe = require('probe-image-size');
+
 const { fetchData } = require('../models/fetchReddit');
 const { fetchInfo } = require('./fetchInfo');
-import { getPlaiceholder } from 'plaiceholder';
-import getFileSize from './getFileSize';
+import {
+  RawWallpaper,
+  RawWallpaperContainer,
+  SubredditListingAPIResponse,
+  SubredditResponseModel,
+  Wallpaper,
+} from '../models/reddit';
+import { generateThumbnail, getMetadata } from '../utils/utils';
 const { decode } = require('html-entities');
 const skipKeywords = ['gallery', 'imgur.com/a/', 'www.reddit.com/r/'];
 
-
 //function for getting the data out of each submisson
-const extractor = (image) => {
+const extractor = (image: RawWallpaper): Promise<Wallpaper> => {
   //return a promise that gets the data out of the submission on resolving
   return new Promise(async (resolve) => {
     resolve({
@@ -18,25 +23,17 @@ const extractor = (image) => {
       id: image.id,
       avatar: await fetchInfo(null, image.author),
       src: image.url,
-      thumb: await getPlaiceholder(
-        decode(image.preview.images[0].resolutions[0].url)
-      ).then(({ base64 }) => base64),
+      thumb: await generateThumbnail(image.url),
       title: image.title,
       rating: image.score,
       created_at: image.created_utc,
-      resolution: await image_probe(image.url)
-        .then(({ width, height }) => {
-          return { width: width, height: height };
-        })
-        .catch((e) => {
-          `some error: ${e}`;
-        }),
+      metadata: await getMetadata(image.url),
     });
   });
 };
 
 //helper function for extracting the images from the raw data
-const extractImages = async (postData) => {
+const extractImages = async (postData: RawWallpaperContainer[]) => {
   // array for keeping the list of promises
   const promises = [];
   //loop through the array of post objects
@@ -61,10 +58,13 @@ const extractImages = async (postData) => {
 };
 
 //method for getting the data from the images
-export const getImageData = async (page, subreddit) => {
+export const getImageData = async (
+  page: string,
+  subreddit: string
+): Promise<SubredditResponseModel> => {
   //await the helper functions for the extracted data
-  const imageData = await fetchData(page, subreddit)
-    .then(async (result) => {
+  const imageData: SubredditResponseModel = await fetchData(page, subreddit)
+    .then(async (result: SubredditListingAPIResponse) => {
       const postData = result.data.children;
       return {
         next: result.data.after,
@@ -72,8 +72,12 @@ export const getImageData = async (page, subreddit) => {
         images: await extractImages(postData),
       };
     })
-    .catch((e) => {
-      console.log('something went wrong in getting extracting the images', e);
+    .catch((e: Error) => {
+      if (e instanceof Error)
+        console.log(
+          'something went wrong in getting extracting the images',
+          e.message
+        );
     });
   //retrun this to then calling function
   return imageData;

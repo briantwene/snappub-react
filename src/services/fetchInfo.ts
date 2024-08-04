@@ -1,61 +1,59 @@
-const axios = require('axios');
-const image_probe = require('probe-image-size');
-import fetchOne from '../models/fetchReddit';
-const { defaultImageGenerator } = require('./defaultImageGenerator');
+import { DetailedWallpaper, Wallpaper } from '../models/reddit';
+import { DEFAULT_DETAILED_WALLPAPER } from '../utils/constants';
+import { getMetadata, generateThumbnail } from '../utils/utils';
+
+const fetchOne = require('../models/fetchReddit');
+const { defaultImageGenerator } = require('../defaultImageGenerator');
 const { getFileSize } = require('./getFileSize');
 
-
-
-const getRedditorInfo = async (author) => {
-  return await axios
-    .get(`https://www.reddit.com/user/${author}/about.json`)
-    .then((response) => {
-      const {
-        data: { data },
-      } = response;
-      return {
-        karma: data.total_karma,
-        avatar: data.snoovatar_img || defaultImageGenerator(),
-      };
-    })
-    .catch((e) =>
-      console.log(
-        'there was an error in fetching profile data:',
-        e.response.statusText
-      )
+const getRedditorInfo = async (author: string) => {
+  try {
+    const response = await fetch(
+      `https://www.reddit.com/user/${author}/about.json`
     );
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    const { data } = await response.json();
+    return {
+      karma: data.total_karma,
+      avatar: data.snoovatar_img || defaultImageGenerator(),
+    };
+  } catch (e) {
+    if (e instanceof Error) {
+      console.log('there was an error in fetching profile data:', e.message);
+    }
+  }
 };
 
-exports.fetchInfo = async (imageId = null, author = null) => {
-  if (author) {
-    const info = await getRedditorInfo(author);
-    return info?.avatar;
-  } else {
-    const aboutWallpaper = await fetchOne(imageId).then(({ data }) => {
-      const info = data.children[0].data;
-      return {
-        url: info.url,
-        author: info.author,
-        subreddit: info.subreddit_name_prefixed,
-        title: info.title,
-        created_at: info.created_utc,
-        rating: info.score,
-      };
-    });
+exports.fetchInfo = async (imageId: string): Promise<DetailedWallpaper> => {
+  try {
+    const response = await fetchOne(imageId);
+    const data = response.data.children[0].data;
 
-    const info = await getRedditorInfo(aboutWallpaper.author);
+    const metadata = await getMetadata(data.url);
+    const info = await getRedditorInfo(data.author);
+    const thumbnail = await generateThumbnail(data.url);
+    const size = await getFileSize(data.url);
 
-    return {
+    const wallpaper: DetailedWallpaper = {
       ...info,
-      ...aboutWallpaper,
-      size: await getFileSize(aboutWallpaper.url),
-      originRes: await image_probe(aboutWallpaper.url)
-        .then(({ width, height }) => {
-          return { width: width, height: height };
-        })
-        .catch((e) => {
-          `some error: ${e}`;
-        }),
+      id: data.id,
+      src: data.url,
+      thumb: thumbnail,
+      author: data.author,
+      subreddit: data.subreddit_name_prefixed,
+      title: data.title,
+      created_at: data.created_utc,
+      rating: data.score,
+      metadata: metadata,
+      size: size,
     };
+
+    return wallpaper;
+  } catch (error) {
+    if (error instanceof Error)
+      console.error('Error fetching image info:', error.message);
+    return DEFAULT_DETAILED_WALLPAPER;
   }
 };

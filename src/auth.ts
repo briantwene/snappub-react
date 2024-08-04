@@ -1,7 +1,27 @@
 import NextAuth from 'next-auth';
 import RedditProvider from 'next-auth/providers/reddit';
+import { type DefaultSession } from 'next-auth';
 
-export const { auth, handlers, signIn, signOut } = NextAuth({// jwt: true,
+import { type DefaultJWT } from 'next-auth/jwt';
+
+declare module 'next-auth' {
+  interface Session {
+    user: {
+      id?: string;
+    } & DefaultSession['user'];
+    accessToken?: string;
+  }
+}
+
+declare module 'next-auth/jwt' {
+  interface JWT extends DefaultJWT {
+    accessToken?: string;
+    id?: string;
+  }
+}
+
+export const { auth, handlers, signIn, signOut } = NextAuth({
+  // jwt: true,
   providers: [
     RedditProvider({
       clientId: process.env.AUTH_REDDIT_ID,
@@ -11,7 +31,7 @@ export const { auth, handlers, signIn, signOut } = NextAuth({// jwt: true,
     }),
   ],
   callbacks: {
-    jwt({ session, token, trigger, account }) {
+    jwt({ token, account }) {
       if (account?.provider === 'reddit') {
         return {
           ...token,
@@ -21,9 +41,9 @@ export const { auth, handlers, signIn, signOut } = NextAuth({// jwt: true,
       }
       return token;
     },
-    session({ session, token, trigger, account }) {
+    session({ session, token }) {
       session.accessToken = token.accessToken;
-      session.user.id = token.id;
+      session.user.id = token.id ?? '';
       return session;
     },
   },

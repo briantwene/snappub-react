@@ -1,14 +1,21 @@
-const axios = require('axios');
 const bytes = require('bytes');
 
-export const getFileSize = async (url) => {
-  const fileSize = await axios
-    .head(url)
-    .then((data) => {
-      return data.headers['content-length'];
-    })
-    .catch((e) => console.log(e));
+export const getFileSize = async (url: string) => {
+  try {
+    const response = await fetch(url);
+    if (!response.ok) {
+      throw new Error(
+        `Error fetching image stream: ${response.status} - ${response.statusText}`
+      );
+    }
+    const fileSize = response.headers.get('content-length');
 
-  return bytes.format(parseInt(fileSize));
+    if (!fileSize) {
+      return 'Unknown';
+    }
+
+    return bytes(parseInt(fileSize));
+  } catch (error) {
+    throw error;
+  }
 };
-

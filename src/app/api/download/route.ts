@@ -1,50 +1,42 @@
 'use strict';
-import { requestImageStream } from '../../../services/getImagestream';
+import { requestImageStream } from '../../../services/requestImagestream';
 import path from 'path';
 import { auth } from '../../../auth';
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 import { headers } from 'next/headers';
+import { ImageTypes } from '../../../models/Wallpaper';
 
-//object for holding the MIME types based on the image extension
-const ImageFormats = {
-  '.jpg': 'jpeg',
-  '.png': 'png',
-  '.gif': 'gif',
-};
-
-export async function GET(request) {
+export async function GET(request: NextRequest) {
   //extract the url and title of the image from query parameters
   const headers = new Headers(request.headers);
   const { searchParams } = new URL(request.url);
 
-  const title = searchParams.get('title');
-  const url = searchParams.get('url');
+  const title = searchParams.get('title') ?? '';
+  const url = searchParams.get('url') ?? '';
+  const extension = searchParams.get('extension') ?? '';
+  const mime = searchParams.get('mime') ?? '';
 
   console.log('title', title, 'url', url);
   const session = await auth();
 
   if (!session) {
-    response.status(401).send('unauthorized');
+    return NextResponse.json({ error: 'unauthorized' }, { status: 401 });
   }
 
   //get the extension of the image
   //and wait for query response of the image
-  const extension = path.extname(url);
-  const format = ImageFormats[extension];
-  const imageStream = await requestImageStream(url).catch((e) => {
-    console.log('something wrong', e);
-  });
+  const imageStream = await requestImageStream(url);
 
   //set HTTP headers to let browser know its for downloading
   //Added a custom header to let the frontend
   //know the image format when downloading
   headers.set(
     'Content-Disposition',
-    `attachment; filename=${title}${extension}`
+    `attachment; filename=${title}.${extension}`
   );
-  headers.set('Content-Type', `image/${format}`);
+  headers.set('Content-Type', `image/${mime}`);
 
-  return new NextResponse(imageStream.data, {
+  return new NextResponse(imageStream, {
     status: 200,
     headers,
   });

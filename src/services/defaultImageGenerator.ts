@@ -26,7 +26,7 @@ const colors = [
   'FF585B',
 ];
 
-exports.defaultImageGenerator = () => {
+export const defaultImageGenerator = () => {
   const randColor = colors[Math.floor(Math.random() * colors.length)];
 
   const randNum = ('0' + Math.floor(Math.random() * 20)).slice(-2);

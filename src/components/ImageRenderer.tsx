@@ -4,7 +4,6 @@ import React, { useState } from 'react';
 import { AspectRatio } from 'react-aspect-ratio';
 
 import Link from 'next/link';
-import ProgressiveImg from 'react-progressive-graceful-image';
 import Image from 'next/image';
 import { Wallpaper } from '../models/Wallpaper';
 
@@ -31,7 +30,7 @@ export const ImageRenderer: React.FC<ImageRendererProps> = ({ image }) => {
       <AspectRatio
         ratio={`${image.resolution?.width}/${image.resolution?.height}`}
       >
-        <Link href={`/app/view/${id}`} state={{ data: image }}>
+        <Link href={`/app/view/${id}`}>
           <Image
             alt={title}
             src={src}
@@ -39,7 +38,7 @@ export const ImageRenderer: React.FC<ImageRendererProps> = ({ image }) => {
             placeholder="blur"
             blurDataURL={thumb}
             layout="fill"
-            className={`image-${loaded ? 'loading' : 'loaded'}`}
+            // className={`image-${loaded ? 'loading' : 'loaded'}`}
             onLoadingComplete={() => setLoaded(true)}
           />
 
