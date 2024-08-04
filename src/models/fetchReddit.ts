@@ -3,10 +3,7 @@
 import { SubredditListingAPIResponse } from './reddit';
 
 import { auth } from '../auth';
-
-const BASE_URL = 'https://oauth.reddit.com';
-const LIMIT = 50;
-const USER_AGENT = 'web:snappub:v0.0.1 (by /u/twene521)';
+import { BASE_URL, LIMIT, USER_AGENT } from '../utils/constants';
 
 //method for querying api
 //for Top 100 Hot posts in r/wallpaper subreddit
@@ -16,7 +13,6 @@ exports.fetchData = async (
 ): Promise<SubredditListingAPIResponse | undefined> => {
   const session = await auth();
   const headers = new Headers();
-  console.log('session', session);
   headers.append('Authorization', `Bearer ${session?.accessToken}`);
   headers.append('User-Agent', USER_AGENT);
 
@@ -47,8 +43,16 @@ exports.fetchData = async (
 };
 
 exports.fetchOne = async (imageId: string) => {
+  const session = await auth();
+  const headers = new Headers();
+  headers.append('Authorization', `Bearer ${session?.accessToken}`);
+  headers.append('User-Agent', USER_AGENT);
+
+  const options = {
+    headers: headers,
+  };
   try {
-    const result = await fetch(`${BASE_URL}/${imageId}.json`);
+    const result = await fetch(`${BASE_URL}/api/info?id=${imageId}`, options);
 
     if (!result.ok) {
       const errorDetails = await result.json();
@@ -56,7 +60,8 @@ exports.fetchOne = async (imageId: string) => {
     }
 
     const data = await result.json();
-    return data[0];
+
+    return data.data;
   } catch (error) {
     if (error instanceof Error) {
       console.error('Error fetching image data:', error.message);

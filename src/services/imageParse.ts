@@ -2,7 +2,7 @@
 //import modules and functions needed
 
 const { fetchData } = require('../models/fetchReddit');
-const { fetchInfo } = require('./fetchInfo');
+const { fetchInfo, getRedditorInfo } = require('./fetchInfo');
 import {
   RawWallpaper,
   RawWallpaperContainer,
@@ -11,7 +11,6 @@ import {
   Wallpaper,
 } from '../models/reddit';
 import { generateThumbnail, getMetadata } from '../utils/utils';
-const { decode } = require('html-entities');
 const skipKeywords = ['gallery', 'imgur.com/a/', 'www.reddit.com/r/'];
 
 //function for getting the data out of each submisson
@@ -21,7 +20,7 @@ const extractor = (image: RawWallpaper): Promise<Wallpaper> => {
     resolve({
       author: image.author,
       id: image.id,
-      avatar: await fetchInfo(null, image.author),
+      avatar: await getRedditorInfo(image.author),
       src: image.url,
       thumb: await generateThumbnail(image.url),
       title: image.title,
@@ -69,7 +68,7 @@ export const getImageData = async (
       return {
         next: result.data.after,
         prev: result.data.before,
-        images: await extractImages(postData),
+        posts: await extractImages(postData),
       };
     })
     .catch((e: Error) => {

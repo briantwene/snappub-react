@@ -4,11 +4,28 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 import numeral from 'numeral';
+import { DetailedWallpaper } from '../../../../models/reddit';
 
 //will go to the view page
 
-function ViewPage({ data }) {
-  console.log('data', data);
+interface ViewPageProps {
+  data: DetailedWallpaper;
+}
+
+export const ViewPage: React.FC<ViewPageProps> = ({ data }) => {
+
+
+  const mime = data.metadata?.mime || 'image/png';
+  const extension = data.metadata?.type || '.png';
+  const params = new URLSearchParams({
+    title: data.title,
+    url: data.src,
+    mime: mime,
+    extension: extension,
+  });
+
+
+  const downloadUrl = `/api/download?${params.toString()}`;
   return (
     <>
       <div className="view-top">
@@ -29,9 +46,7 @@ function ViewPage({ data }) {
 
         <div className="view-top-download">
           <button className="download-btn">
-            <Link href={`/api/download?title=${data.title}&url=${data.url}`}>
-              Download
-            </Link>
+            <Link href={downloadUrl}>Download</Link>
           </button>
           {/* <span className="view-download-dropdown download-link">
             <p>
@@ -41,7 +56,7 @@ function ViewPage({ data }) {
         </div>
       </div>
       <div className="view-image">
-        <Image alt={data?.title} className="image" fill src={data?.url} />
+        <Image alt={data?.title} className="image" fill src={data.src} />
       </div>
       <div className="view-info">
         <div className="author-info infobox">
@@ -78,7 +93,7 @@ function ViewPage({ data }) {
                 </tr>
                 <tr>
                   <td>Date Posted</td>
-                  <td>{new Date(data?.created_at).toDateString()}</td>
+                  <td>{new Date(data?.created_at * 1000).toDateString()}</td>
                 </tr>
                 <tr>
                   <td>Size</td>
@@ -87,7 +102,7 @@ function ViewPage({ data }) {
                 <tr>
                   <td>Resoultion</td>
                   <td>
-                    {data?.originRes.width} &#215; {data?.originRes.height}
+                    {data?.metadata?.width} &#215; {data?.metadata?.height}
                   </td>
                 </tr>
                 <tr>
@@ -101,6 +116,6 @@ function ViewPage({ data }) {
       </div>
     </>
   );
-}
+};
 
 export default ViewPage;

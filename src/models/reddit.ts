@@ -32,13 +32,13 @@ export type RawWallpaperContainer = {
 export interface Wallpaper {
   author: string;
   id: string;
-  avatar?: string;
+  avatar: string;
   src: string;
   thumb: string;
   title: string;
   rating: number;
   created_at: number;
-  metadata?: {
+  metadata: {
     width: number;
     height: number;
     type: string;
@@ -46,10 +46,15 @@ export interface Wallpaper {
   };
 }
 
+export type RedditorBasicInfo = {
+  avatar: string;
+  karma: number;
+};
+
 export interface DetailedWallpaper extends Wallpaper {
   subreddit: string;
   size: string;
-  karma?: number;
+  karma: number;
 }
 
 export interface SubredditResponseModel {

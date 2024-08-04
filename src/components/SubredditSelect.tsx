@@ -32,7 +32,6 @@ const SubredditSelect: React.FC<SubredditSelectProps> = ({
   defaultVal,
   handleChange,
 }) => {
-  console.log('OPTIONS', options);
   return (
     <Select
       options={options}

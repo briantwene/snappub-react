@@ -1,4 +1,7 @@
+'use server';
 import { decode } from 'html-entities';
+import { BASE_URL, USER_AGENT } from './constants';
+import { auth } from '../auth';
 
 const subreddits: string[] = [
   'wallpaper',
@@ -21,8 +24,17 @@ async function optionArray() {
   let promises = [];
 
   const getPfp = async (subreddit: string) => {
+    const session = await auth();
+    const headers = new Headers();
+    headers.append('Authorization', `Bearer ${session?.accessToken}`);
+    headers.append('User-Agent', USER_AGENT);
+
+    const option = {
+      headers: headers,
+    };
     const response = await fetch(
-      `https://www.reddit.com/r/${subreddit}/about.json`
+      `${BASE_URL}/r/${subreddit}/about.json`,
+      option
     );
 
     const info = await response.json();

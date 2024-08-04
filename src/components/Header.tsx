@@ -26,7 +26,7 @@ export const Header: React.FC = () => {
   const changeSubreddit = useAppStore((state) => state?.changeSubreddit);
 
   const handleChange = (selectedOption: OnChangeValue<Subreddit, false>) => {
-    console.log('SelectedOptions', selectedOption);
+
 
     if (selectedOption !== null) {
       changeSubreddit(selectedOption?.value);

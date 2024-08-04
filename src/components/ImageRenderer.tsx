@@ -5,14 +5,14 @@ import { AspectRatio } from 'react-aspect-ratio';
 
 import Link from 'next/link';
 import Image from 'next/image';
-import { Wallpaper } from '../models/Wallpaper';
+import { Wallpaper } from '../models/reddit';
 
 interface ImageRendererProps {
   image: Wallpaper;
 }
 
 export const ImageRenderer: React.FC<ImageRendererProps> = ({ image }) => {
-  const { src, thumb, author, avatar, id, title } = image;
+  const { src, thumb, author, avatar, id, title, metadata } = image;
   const [loaded, setLoaded] = useState(false);
 
   return (
@@ -27,9 +27,7 @@ export const ImageRenderer: React.FC<ImageRendererProps> = ({ image }) => {
         />
         <span>u/{author}</span>
       </div>
-      <AspectRatio
-        ratio={`${image.resolution?.width}/${image.resolution?.height}`}
-      >
+      <AspectRatio ratio={`${metadata?.width}/${metadata?.height}`}>
         <Link href={`/app/view/${id}`}>
           <Image
             alt={title}
@@ -43,13 +41,12 @@ export const ImageRenderer: React.FC<ImageRendererProps> = ({ image }) => {
           />
 
           <div className="resolution">
-            {`${image?.resolution?.height}`} &#10005;{' '}
-            {`${image?.resolution?.width}`}
+            {`${metadata?.height}`} &#10005; {`${metadata?.width}`}
           </div>
         </Link>
       </AspectRatio>
       <div className="mobile-res">
-        {`${image.resolution?.height}`} &#10005; {`${image.resolution?.width}`}
+        {`${metadata?.height}`} &#10005; {`${metadata?.width}`}
       </div>
     </div>
   );

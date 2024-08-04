@@ -112,3 +112,8 @@ export const DEFAULT_DETAILED_WALLPAPER: DetailedWallpaper = {
   karma: 0,
   avatar: 'unknown',
 };
+
+
+export const BASE_URL = 'https://oauth.reddit.com';
+export const LIMIT = 50;
+export const USER_AGENT = 'web:snappub:v0.0.1 (by /u/twene521)';

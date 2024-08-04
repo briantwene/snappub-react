@@ -1,17 +1,41 @@
-import { DetailedWallpaper, Wallpaper } from '../models/reddit';
-import { DEFAULT_DETAILED_WALLPAPER } from '../utils/constants';
+import { auth } from '../auth';
+import {
+  DetailedWallpaper,
+  RedditorBasicInfo,
+  Wallpaper,
+} from '../models/reddit';
+import {
+  BASE_URL,
+  DEFAULT_DETAILED_WALLPAPER,
+  USER_AGENT,
+} from '../utils/constants';
 import { getMetadata, generateThumbnail } from '../utils/utils';
 
-const fetchOne = require('../models/fetchReddit');
-const { defaultImageGenerator } = require('../defaultImageGenerator');
+const { fetchOne } = require('../models/fetchReddit');
+import { defaultImageGenerator } from './defaultImageGenerator';
 const { getFileSize } = require('./getFileSize');
 
-const getRedditorInfo = async (author: string) => {
+export const getRedditorInfo = async (
+  author: string
+): Promise<RedditorBasicInfo> => {
+  const session = await auth();
+  const headers = new Headers();
+
+  headers.append('Authorization', `Bearer ${session?.accessToken}`);
+  headers.append('User-Agent', USER_AGENT);
+
+  const options = {
+    headers: headers,
+  };
   try {
     const response = await fetch(
-      `https://www.reddit.com/user/${author}/about.json`
+      `${BASE_URL}/user/${author}/about.json`,
+      options
     );
     if (!response.ok) {
+      console.error(
+        `HTTP error! status: ${response.status} - ${response.statusText}`
+      );
       throw new Error(`HTTP error! status: ${response.status}`);
     }
     const { data } = await response.json();
@@ -23,13 +47,20 @@ const getRedditorInfo = async (author: string) => {
     if (e instanceof Error) {
       console.log('there was an error in fetching profile data:', e.message);
     }
+    return {
+      karma: 0,
+      avatar: defaultImageGenerator(),
+    };
   }
 };
 
-exports.fetchInfo = async (imageId: string): Promise<DetailedWallpaper> => {
+export const fetchInfo = async (
+  imageId: string
+): Promise<DetailedWallpaper> => {
   try {
-    const response = await fetchOne(imageId);
-    const data = response.data.children[0].data;
+    const response = await fetchOne(`t3_${imageId}`);
+
+    const data = response.children[0].data;
 
     const metadata = await getMetadata(data.url);
     const info = await getRedditorInfo(data.author);
@@ -37,7 +68,8 @@ exports.fetchInfo = async (imageId: string): Promise<DetailedWallpaper> => {
     const size = await getFileSize(data.url);
 
     const wallpaper: DetailedWallpaper = {
-      ...info,
+      avatar: info.avatar,
+      karma: info.karma,
       id: data.id,
       src: data.url,
       thumb: thumbnail,

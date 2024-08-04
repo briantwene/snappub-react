@@ -4,7 +4,7 @@ import path from 'path';
 import { auth } from '../../../auth';
 import { NextRequest, NextResponse } from 'next/server';
 import { headers } from 'next/headers';
-import { ImageTypes } from '../../../models/Wallpaper';
+
 
 export async function GET(request: NextRequest) {
   //extract the url and title of the image from query parameters
@@ -16,7 +16,7 @@ export async function GET(request: NextRequest) {
   const extension = searchParams.get('extension') ?? '';
   const mime = searchParams.get('mime') ?? '';
 
-  console.log('title', title, 'url', url);
+ 
   const session = await auth();
 
   if (!session) {

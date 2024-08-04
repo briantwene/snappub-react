@@ -2,11 +2,12 @@
 import React from 'react';
 import { useQuery } from '@tanstack/react-query';
 import ImageRenderer from './ImageRenderer';
-import { Wallpaper, WallpaperResponse } from '../models/Wallpaper';
+import { SubredditResponseModel, Wallpaper } from '../models/reddit';
+import { useAppStore } from '../utils/store';
 
-const fetchImages = async () => {
+const fetchImages = async (subreddit: string) => {
   const pageParam = '';
-  const subreddit = 'wallpapers';
+
   const res = await fetch(
     '/api/images?' +
       new URLSearchParams({
@@ -15,17 +16,19 @@ const fetchImages = async () => {
       }).toString()
   );
   if (!res.ok) {
-    console.log(res);
     throw new Error(`${res.status} - ${res.statusText}`);
   }
-  const data: WallpaperResponse = await res.json();
+  const data: SubredditResponseModel = await res.json();
   return data;
 };
 
 const InfiniteList: React.FC = () => {
+  const subreddit = useAppStore((state) => state?.current_subreddit);
+
   const { isPending, isError, data, error } = useQuery({
-    queryKey: ['wallpapers'],
-    queryFn: fetchImages,
+    queryKey: ['wallpapers', subreddit],
+    queryFn: () => fetchImages(subreddit),
+    enabled: !!subreddit,
   });
 
   if (isPending) return <div>Loading...</div>;
@@ -33,7 +36,7 @@ const InfiniteList: React.FC = () => {
 
   return (
     <div className="photo_grid">
-      {data?.images?.map((image: Wallpaper) => (
+      {data?.posts?.map((image: Wallpaper) => (
         <ImageRenderer image={image} key={image.id} />
       ))}
       <div></div>
