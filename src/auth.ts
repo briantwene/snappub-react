@@ -3,6 +3,7 @@ import RedditProvider from 'next-auth/providers/reddit';
 import { type DefaultSession } from 'next-auth';
 
 import { type DefaultJWT } from 'next-auth/jwt';
+import { Provider } from '@auth/core/providers';
 
 declare module 'next-auth' {
   interface Session {
@@ -20,16 +21,36 @@ declare module 'next-auth/jwt' {
   }
 }
 
+const providers: Provider[] = [
+  RedditProvider({
+    clientId: process.env.AUTH_REDDIT_ID,
+    clientSecret: process.env.AUTH_REDDIT_SECRET,
+    authorization:
+      'https://www.reddit.com/api/v1/authorize?&scope=identity,read',
+  }),
+];
+
+export const providerMap = providers.map((provider) => {
+  if (typeof provider === 'function') {
+    const providerData = provider();
+    return {
+      id: providerData.id,
+      name: providerData.name,
+    };
+  } else {
+    return {
+      id: provider.id,
+      name: provider.name,
+    };
+  }
+});
+
 export const { auth, handlers, signIn, signOut } = NextAuth({
   // jwt: true,
-  providers: [
-    RedditProvider({
-      clientId: process.env.AUTH_REDDIT_ID,
-      clientSecret: process.env.AUTH_REDDIT_SECRET,
-      authorization:
-        'https://www.reddit.com/api/v1/authorize?&scope=identity,read',
-    }),
-  ],
+  providers: providers,
+  pages: {
+    signIn: '/signin',
+  },
   callbacks: {
     jwt({ token, account }) {
       if (account?.provider === 'reddit') {

@@ -1,0 +1,113 @@
+@import '../styles/mixins';
+@import '../styles/functions';
+@import '../styles/variables';
+@import '../styles/placeholders';
+
+@mixin gradient-text($start-color, $end-color) {
+  background: linear-gradient(to right, $start-color, $end-color);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+// Function to lighten a color
+@function lighten-color($color, $percentage) {
+  @return lighten($color, $percentage);
+}
+
+// Main container styles
+.main {
+  $reddit-red: #ff4500;
+  $light-red: lighten-color($reddit-red, 40%);
+  background: linear-gradient(to top, $light-red, #ffffff);
+  height: 100%;
+
+
+}
+
+.logo {
+  width: 150px;
+  height: 100%;
+}
+
+.container {
+  @extend %container;
+  //background-color: #000;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.header {
+  height: 72px;
+  display: flex;
+  align-items: center;
+  padding: 0 24px;
+
+  nav {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content : space-between;
+  }
+
+  justify-content: space-between;
+  button {
+    @extend %button-secondary;
+  }
+
+  a {
+    @extend %button-secondary;
+  } // Apply gradient text
+}
+
+.logo {
+  font-size: 24px;
+  font-weight: 900;
+  @include gradient-text(#ff4500, #ffcc00);
+}
+
+.hero {
+  flex-grow: 1;
+  margin-top: $space-md;
+  text-align: center;
+  
+  
+
+  @include breakpoint-md {
+    margin-top: $space-4xl;
+  }
+
+  h1 {
+    font-size: $font-size-3xl;
+    font-weight: $font-weight-bold;
+    padding: $space-xl $space-md;
+    margin-bottom: 0;
+    text-align: center;
+    line-height: 1.2;
+
+    @include breakpoint-md {
+      font-size: $font-size-4xl;
+    
+      
+    }
+  }
+
+  p {
+    font-size: $font-size-lg;
+    font-weight: $font-weight-regular;
+    padding: 0 $space-md;
+    text-align: center;
+
+    margin: $space-lg;
+
+    @include breakpoint-md {
+      margin: 0 10vw;
+    }
+  }
+    button, a {
+    @extend %button-primary;
+    margin-top: $space-xl;
+    
+  }
+
+
+}

@@ -1,0 +1,90 @@
+@import "./variables.scss";
+
+// Button Placeholders
+%button-base {
+  display: inline-block;
+  font-family: 'Poppins', sans-serif;
+  font-weight: $font-weight-medium;
+  font-size: $font-size-md;
+  border-radius: 8px;
+  padding: 0.5rem $space-md;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background-color 0.3s;
+}
+
+%button-primary {
+  @extend %button-base;
+  background-color: $primary-orange;
+  color: $secondary-white;
+
+  &:hover {
+    background-color: $primary-red;
+  }
+}
+
+%button-secondary {
+  @extend %button-base;
+  background-color: $secondary-dark-gray;
+  color: $secondary-white;
+
+  &:hover {
+    background-color: $accent-dark-gray;
+  }
+}
+
+
+// Link Placeholders
+%link-base {
+    font-family: 'Poppins', sans-serif;
+    text-decoration: none;
+  }
+  
+  %link-primary {
+    @extend %link-base;
+    color: $primary-red;
+  
+    &:hover {
+      text-decoration: underline;
+      color: $primary-orange;
+    }
+  }
+
+
+// Navigation Link Placeholder
+%link-nav {
+  @extend %link-base;
+  color: $secondary-dark-gray;
+  padding: 0.5rem 1rem;
+  display: inline-block;
+  
+
+  &:hover, &:focus {
+    background-color: $accent-light-gray;
+    color: $primary-red;
+  }
+}
+
+
+// Container Placeholder
+%container {
+  width: 100%;
+  padding-right: 1rem;
+  padding-left: 1rem;
+  margin-right: auto;
+  margin-left: auto;
+
+  @media (min-width: $breakpoint-sm) {
+    max-width: 640px;
+  }
+  @media (min-width: $breakpoint-md) {
+    max-width: 768px;
+  }
+  @media (min-width: $breakpoint-lg) {
+    max-width: 1024px;
+  }
+  @media (min-width: $breakpoint-xl) {
+    max-width: 1280px;
+  }
+}

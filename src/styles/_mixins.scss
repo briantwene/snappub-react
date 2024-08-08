@@ -1,0 +1,143 @@
+@mixin flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin button($color, $size) {
+
+  @extend %btn-common;
+  background-color: $color;
+
+  @if $size == btn_xs {
+    @include btn_xs;
+  }
+  @if $size == btn_s {
+    @include btn_s;
+  }
+  @if $size == btn_m {
+    @include btn_m;
+  }
+  @if $size == btn_lg {
+    @include btn_lg;
+  }
+
+  &:hover {
+    background-color: darken($color, 10%);
+  }
+}
+
+// Breakpoint mixins
+@mixin breakpoint-sm {
+  @media (min-width: 640px) {
+    @content;
+  }
+}
+
+@mixin breakpoint-md {
+  @media (min-width: 768px) {
+    @content;
+  }
+}
+
+@mixin breakpoint-lg {
+  @media (min-width: 1024px) {
+    @content;
+  }
+}
+
+@mixin breakpoint-xl {
+  @media (min-width: 1280px) {
+    @content;
+  }
+}
+
+@mixin breakpoint-xxl {
+  @media (min-width: 1536px) {
+    @content;
+  }
+}
+
+
+@mixin container {
+  width: 100%;
+  padding-right: 1rem;
+  padding-left: 1rem;
+  margin-right: auto;
+  margin-left: auto;
+
+  @include breakpoint-sm {
+    max-width: 640px;
+  }
+  @include breakpoint-md {
+    max-width: 768px;
+  }
+  @include breakpoint-lg {
+    max-width: 1024px;
+  }
+  @include breakpoint-xl {
+    max-width: 1280px;
+  }
+  @include breakpoint-xxl {
+    max-width: 1536px;
+  }
+}
+
+
+@mixin desktop() {
+  @media (min-width: 768px) {
+    @content;
+  }
+}
+
+// Define common button styles
+%btn-common {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  border: none;
+  line-height: normal;
+  font-weight: 400;
+  font-style: normal;
+  text-decoration: none;
+  color: white;
+  transition: all 0.25s;
+  text-align: center;
+  white-space: nowrap;
+  cursor: pointer;
+  touch-action: manipulation;
+  outline: none;
+  user-select: none;
+
+  &:disabled {
+    cursor: not-allowed;
+  }
+}
+
+// Mixin to get button size
+@mixin get_size($height, $font, $min-width: 100px) {
+ $vertical-padding: max(8px, ($height - $font) / 2);
+  $horizontal-padding: max(16px, $vertical-padding * 2);
+  padding: $vertical-padding $horizontal-padding;
+  height: $height;
+  font-size: $font;
+  min-width: $min-width;
+}
+
+// Define size mixins
+@mixin btn_lg {
+  @include get_size(56px, 32px);
+}
+
+@mixin btn_m {
+  @include get_size(44px, 16px);
+}
+
+@mixin btn_s {
+  @include get_size(36px, 14px);
+}
+
+@mixin btn_xs {
+  @include get_size(24px, 12px);
+}

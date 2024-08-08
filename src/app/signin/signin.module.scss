@@ -1,0 +1,49 @@
+@import '../../styles/mixins';
+@import '../../styles/functions';
+
+.container {
+    @include container;
+    @include flex-center;
+    height: 100%;
+}
+
+
+.content {
+}
+
+
+.title {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-bottom: 32px;
+    row-gap: 8px;
+    h1 {
+        font-size: em(24);
+        font-weight: 900;
+        margin-bottom: 16px;
+    }
+
+    p {
+        font-size: em(20);
+        font-weight: 500;
+    }
+}
+
+
+form {
+    .reddit {
+        @include button(#ff4500, "btn_m");
+        display: flex;
+        justify-content: center;
+        gap: 8px;
+        font-weight: 500;
+    }
+
+    .icon {
+        font-size: em(24);
+    }
+
+
+}

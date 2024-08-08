@@ -4,6 +4,7 @@ import { auth } from '../auth';
 
 import { Providers } from '../components/Providers';
 
+import '../styles/globals.scss';
 export const metadata = {
   title: 'SnapPub - Home',
   description: 'Gateway to the best wallpapers from reddit',
@@ -21,7 +22,7 @@ export default async function RootLayout({ children }: RootLayoutProps) {
         <title>{metadata.title}</title>
         <meta name="description" content={metadata.description} />
       </head>
-      <body>
+      <body id="__next">
         <Providers session={session}>{children}</Providers>
       </body>
     </html>

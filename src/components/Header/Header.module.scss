@@ -1,0 +1,106 @@
+@import '../../styles/variables.scss';
+@import '../../styles/placeholders.scss';
+
+.header {
+  border-bottom: 1px solid rgb(227, 227, 227);
+  padding: 0 $space-sm;
+  background-color: $secondary-white;
+  height: 64px; // Assuming a background color
+}
+
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
+ 
+}
+
+.logo {
+  height: 32px;
+  max-width: 140px;
+}
+
+.dropdown {
+  flex-grow: 1; // Allow the dropdown to grow and take available space
+  display: flex;
+  justify-content: center;
+  padding: 0 $space-md; // Add some padding for better alignment
+}
+
+.cta {
+  .sign_out {
+    @extend %button-secondary;
+  }
+}
+
+.profile {
+  display: flex;
+  align-items: center;
+  gap: $space-xs;
+  //border: 1px solid $accent-medium-gray;
+  padding: $space-xs;
+  border-radius: 80px;
+  cursor: pointer;
+
+  img {
+    border-radius: 50%;
+  }
+}
+
+.menu {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  background-color: white;
+  position: absolute;
+  top: 64px;
+  z-index: 1;
+  visibility: hidden;
+  opacity: 0;
+  transform: scale(0.97) translateX(-5px);
+  transition: 0.1s ease-in-out;
+  box-shadow: $accent-dark-gray;
+  padding: $space-xxs;
+  box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+
+  section ul{
+    list-style-type: none;
+    display: flex;
+    flex-direction: column;
+    gap: $space-xxs;
+
+    a{
+      @extend %link-nav;
+      width: 100%;
+      display: flex; align-items: center;
+      gap: $space-xs;
+      border-radius: 8px;
+      font-weight: $font-weight-medium;
+      font-size: $font-size-sm;
+    }
+
+    a > span {
+      font-weight: $font-weight-regular;
+      color: $accent-dark-gray
+    }
+  }
+
+  &.active {
+    visibility: visible;
+    opacity: 1;
+    transform: scale(1) translateX(0);
+  }
+
+  @media screen and (min-width: 768px) {
+    width: 256px;
+    transform: scale(1) translateX(0);
+    gap: $space-md;
+    top: 56px;
+    right: 0;
+    margin-right: $space-md;
+    border-radius: 8px;
+
+
+  }
+}
