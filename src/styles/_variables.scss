@@ -1,0 +1,52 @@
+// Primary Colors
+$primary-orange: #ff4500;
+$primary-red: #ff5700;
+
+// Secondary Colors
+$secondary-white: #ffffff;
+$secondary-light-gray: #e5e5e5;
+$secondary-dark-gray: #333333;
+
+// Accent Colors
+$accent-light-gray: #f4f4f4;
+$accent-medium-gray: #cccccc;
+$accent-dark-gray: #777777;
+
+// Font Color
+$font-color: #333333;
+
+$font-stack: 'Poppins', sans-serif;
+
+// Font Sizes (in rem units for scalability)
+$font-size-xs: 0.75rem; // 12px
+$font-size-sm: 0.875rem; // 14px
+$font-size-md: 1rem; // 16px
+$font-size-lg: 1.25rem; // 20px
+$font-size-xl: 1.5rem; // 24px
+$font-size-2xl: 2rem; // 32px
+$font-size-3xl: 2.5rem; // 40px
+$font-size-4xl: 3rem; // 48px
+
+// Font Weights
+$font-weight-light: 300;
+$font-weight-regular: 400;
+$font-weight-medium: 500;
+$font-weight-bold: 700;
+
+// Spacing (in rem units)
+$space-xxs: 0.25rem; // 4px
+$space-xs: 0.5rem; // 8px
+$space-sm: 1rem; // 16px
+$space-md: 1.5rem; // 24px
+$space-lg: 2rem; // 32px
+$space-xl: 3rem; // 48px
+$space-2xl: 4rem; // 64px
+$space-3xl: 5rem; // 80px
+$space-4xl: 6rem; // 96px
+$space-5xl: 7rem; // 112px
+
+// Variables for simplified breakpoints
+$breakpoint-sm: 640px;
+$breakpoint-md: 768px;
+$breakpoint-lg: 1024px;
+$breakpoint-xl: 1280px;
