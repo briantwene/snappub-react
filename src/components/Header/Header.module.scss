@@ -3,17 +3,16 @@
 
 .header {
   border-bottom: 1px solid rgb(227, 227, 227);
-  padding: 0 $space-sm;
   background-color: $secondary-white;
   height: 64px; // Assuming a background color
 }
 
 .nav {
+  @extend %container;
   display: flex;
   justify-content: space-between;
   align-items: center;
   height: 100%;
- 
 }
 
 .logo {
@@ -62,18 +61,20 @@
   transition: 0.1s ease-in-out;
   box-shadow: $accent-dark-gray;
   padding: $space-xxs;
-  box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+  box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px,
+    rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
 
-  section ul{
+  section ul {
     list-style-type: none;
     display: flex;
     flex-direction: column;
     gap: $space-xxs;
 
-    a{
+    a {
       @extend %link-nav;
       width: 100%;
-      display: flex; align-items: center;
+      display: flex;
+      align-items: center;
       gap: $space-xs;
       border-radius: 8px;
       font-weight: $font-weight-medium;
@@ -82,7 +83,7 @@
 
     a > span {
       font-weight: $font-weight-regular;
-      color: $accent-dark-gray
+      color: $accent-dark-gray;
     }
   }
 
@@ -100,7 +101,5 @@
     right: 0;
     margin-right: $space-md;
     border-radius: 8px;
-
-
   }
 }

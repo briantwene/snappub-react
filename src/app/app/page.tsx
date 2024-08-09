@@ -11,6 +11,7 @@ import { useAppStore } from '../../utils/store';
 import Image from 'next/image';
 import { useInView } from 'react-intersection-observer';
 import InfiniteList from '../../components/InfiniteList';
+import styles from './app.module.scss';
 // import React, { useEffect } from 'react';
 
 function Home() {
@@ -74,8 +75,9 @@ function Home() {
 
   return (
     <>
-      <div
-        className={`gallery-title-overlay${subredditBanner ? '' : '-noBanner'}`}
+      <section
+        className={styles.hero_container}
+        // className={`gallery-title-overlay${subredditBanner ? '' : '-noBanner'}`}
       >
         {subredditBanner && (
           <Image
@@ -83,22 +85,25 @@ function Home() {
             priority
             alt=""
             fill
-            className="image-overlay"
+            className={styles.image_overlay}
           />
         )}
 
-        <h1 className={`title${subredditBanner ? '' : '-noBanner'}`}>
+        <h1
+          // className={`title${subredditBanner ? '' : '-noBanner'}`}
+          className={styles.hero_title}
+        >
           r/
           {currentSubreddit?.toLowerCase().endsWith('porn')
             ? currentSubreddit?.toLowerCase().replace('porn', '****')
             : currentSubreddit}
         </h1>
-      </div>
+      </section>
       {/* <Filter /> */}
-      <div className="photo_grid">
+      <section className="photo_grid">
         {/* <InfiniteList /> */}
         <div></div>
-      </div>
+      </section>
       {/* <div ref={ref} className={!hasNextPage ? 'hidden' : ''}>
         {isFetchingNextPage ? 'Loading more...' : ''}
       </div> */}

@@ -1,0 +1,50 @@
+@import "../../styles/variables.scss" ;
+
+
+.container {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+
+.hero_container {
+  margin-top: $space-lg;
+  position: relative;
+  background-color: black;
+ height: 224px;
+  border-radius: 16px;
+
+  @media (min-width: $breakpoint-md) {
+    height: 384px;
+  }
+}
+
+.image_overlay {
+  position: relative !important;
+  object-fit: cover;
+  background-position: center;
+  opacity: 0.7;
+  border-radius: 16px;
+}
+
+.hero_title {
+ 
+  font-size: $font-size-3xl;
+  font-weight: $font-weight-bold;
+  line-height: 1.25;
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+  color: white;
+
+
+  @media (min-width: $breakpoint-md) {
+    font-size: $font-size-4xl;
+  }
+}

@@ -2,6 +2,7 @@ import React from 'react';
 import Footer from '../../components/Footer';
 import Header from '../../components/Header/Header';
 import '../../Sass/App.scss';
+import styles from './layout.module.scss';
 
 interface AppLayoutProps {
   children: React.ReactNode;
@@ -9,13 +10,11 @@ interface AppLayoutProps {
 
 const AppLayout: React.FC<AppLayoutProps> = ({ children }) => {
   return (
-    <>
+    <main className={styles.container}>
       <Header />
-      <div className="page-body">
-        <div className="content">{children}</div>
-        <Footer />
-      </div>
-    </>
+      <main className={styles.content}>{children}</main>
+      <Footer />
+    </main>
   );
 };
 
