@@ -1,0 +1,50 @@
+@import '../../styles/variables.scss';
+@import '../../styles/placeholders.scss';
+
+.footer {
+  color: $font-color;
+  padding: $space-sm $space-sm;
+
+  text-align: center;
+  border-top: 1px solid rgb(227, 227, 227);
+}
+
+.footerNav {
+    @extend %container;
+  display: flex;
+  flex-direction: column; // Stack sections vertically for mobile
+  align-items: center; // Center content within each section
+  gap: $space-md; // Space between links
+
+  section {
+    display: flex;
+    justify-content: center;
+    width: 100%; // Ensure sections take full width on mobile
+    text-align: center; // Center content within each section
+  }
+
+  .footerLink {
+    color: $font-color;
+
+    &:hover,
+    &:focus {
+      color: lighten($font-color, 20%); // Slight hover effect
+    }
+  }
+
+  .logo {
+    width: 120px; // Define the maximum width for the logo
+    height: auto; // Maintain aspect ratio
+    max-height: 50px; // Ensure it doesn’t exceed a certain height
+  }
+
+  @media (min-width: $breakpoint-md) {
+    flex-direction: row; // Arrange sections in a row for desktop
+    justify-content: center; // Center the entire footerNav
+  }
+}
+
+
+.social {
+    font-size: $font-size-xl;
+}

@@ -22,7 +22,7 @@ exports.fetchData = async (
 
   try {
     const result = await fetch(
-      `${BASE_URL}/r/${subreddit}?limit=${LIMIT}&sort=hot`,
+      `${BASE_URL}/r/${subreddit}.json?limit=${LIMIT}&sort=hot`,
       options
     );
 

@@ -50,6 +50,7 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
   providers: providers,
   pages: {
     signIn: '/signin',
+    signOut: '/signout'
   },
   callbacks: {
     jwt({ token, account }) {

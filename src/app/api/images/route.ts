@@ -28,6 +28,8 @@ export async function GET(request: NextRequest) {
     }
     let results = await getImageData('', subreddit);
 
+    console.log('results', results);
+
     //then send to the front end
     return NextResponse.json(results, { status: 200 });
   }

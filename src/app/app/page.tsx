@@ -101,7 +101,7 @@ function Home() {
       </section>
       {/* <Filter /> */}
       <section className="photo_grid">
-        {/* <InfiniteList /> */}
+        <InfiniteList />
         <div></div>
       </section>
       {/* <div ref={ref} className={!hasNextPage ? 'hidden' : ''}>

@@ -2,7 +2,7 @@ import { auth } from '../auth';
 import React from 'react';
 import Link from 'next/link';
 import styles from './index.module.scss';
-import { RedwallLogo } from '../components/icon';
+import { RedwallLogo } from '../components/Icon';
 
 const Home = async () => {
   const session = await auth();
@@ -11,8 +11,8 @@ const Home = async () => {
       <section className={styles.container}>
         <header className={styles.header}>
           <nav className={styles.nav}>
-            <div className={styles.logo}>
-              <RedwallLogo />
+            <div>
+              <RedwallLogo className={styles.logo} />
             </div>
             <div>
               {!session?.user?.id ? (

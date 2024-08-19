@@ -57,8 +57,8 @@ export const Header: React.FC = () => {
   return (
     <header className={styles.header}>
       <nav className={styles.nav}>
-        <div className={styles.logo}>
-          <RedwallLogo />
+        <div>
+          <RedwallLogo className={styles.logo} />
         </div>
         {/* <div className={styles.dropdown}>
           <SubbreditSelect
@@ -103,7 +103,7 @@ export const Header: React.FC = () => {
                 </Link>
               </li>
               <li>
-                <Link href="/logout">
+                <Link href="/signout">
                   <FaSignOutAlt /> Sign out
                 </Link>
               </li>

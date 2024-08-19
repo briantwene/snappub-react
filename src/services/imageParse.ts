@@ -79,5 +79,7 @@ export const getImageData = async (
         );
     });
   //retrun this to then calling function
+
+  console.log('imageData', imageData);
   return imageData;
 };
