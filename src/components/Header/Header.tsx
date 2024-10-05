@@ -77,9 +77,7 @@ export const Header: React.FC = () => {
 
           {/* <span>u/twene521</span>
           <HiChevronDown /> */}
-        </div>
-
-        <div className={navMenu}>
+          <div className={navMenu}>
           <section>
             <ul>
               <li>
@@ -116,7 +114,10 @@ export const Header: React.FC = () => {
               </li>
             </ul>
           </section> */}
+        </div>  
         </div>
+
+        
       </nav>
     </header>
   );

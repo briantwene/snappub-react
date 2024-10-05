@@ -1,9 +1,10 @@
 'use client';
 import React from 'react';
 import { useQuery } from '@tanstack/react-query';
-import ImageRenderer from './ImageRenderer';
-import { SubredditResponseModel, Wallpaper } from '../models/reddit';
-import { useAppStore } from '../utils/store';
+import { ImageRenderer } from '../ImageRenderer/ImageRenderer';
+import { SubredditResponseModel, Wallpaper } from '../../models/reddit';
+import { useAppStore } from '../../utils/store';
+import styles from './InfiniteList.module.scss';
 
 const fetchImages = async (subreddit: string) => {
   const pageParam = '';
@@ -35,7 +36,7 @@ const InfiniteList: React.FC = () => {
   if (isError) return <div>Error: {error.message}</div>;
 
   return (
-    <div className="photo_grid">
+    <div className={styles.masonry_grid}>
       {data?.posts?.map((image: Wallpaper) => (
         <ImageRenderer image={image} key={image.id} />
       ))}

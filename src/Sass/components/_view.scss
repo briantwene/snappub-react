@@ -22,6 +22,7 @@
 
   &-poster {
     display: flex;
+    align-items: center;
     padding: 0em 1em;
 
     img {
@@ -90,11 +91,17 @@
 
 @include desktop() {
   .view-image {
+    margin-top: 16px;
+    margin-right: auto;
+    margin-left: auto;
     width: 50%;
     position: relative;
+  
   }
 
   .view-top {
+    padding-top: 16px;
+
     justify-content: space-evenly;
     font-weight: 500;
 

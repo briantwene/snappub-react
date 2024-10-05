@@ -110,7 +110,10 @@ export const DEFAULT_DETAILED_WALLPAPER: DetailedWallpaper = {
   metadata: { width: 0, height: 0, type: 'unknown', mime: 'unknown' },
   size: '0B',
   karma: 0,
-  avatar: 'unknown',
+  avatar: {
+    avatar: 'unknown',
+    karma: 0,
+  },
 };
 
 

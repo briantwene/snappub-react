@@ -78,6 +78,8 @@
 
   @media (min-width: $breakpoint-sm) {
     max-width: 640px;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
   }
   @media (min-width: $breakpoint-md) {
     max-width: 768px;

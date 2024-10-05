@@ -1,0 +1,23 @@
+@import '../../styles/variables.scss';
+
+.photo_grid {
+  column-gap: 1em;
+}
+
+.masonry_grid {
+  column-gap: 1em;
+  margin: 2em 0;
+}
+
+@media screen and (min-width: $breakpoint-sm) {
+  .masonry_grid {
+    column-count: 2;
+  }
+}
+
+@media screen and (min-width: $breakpoint-md) {
+  .masonry_grid {
+    column-count: 3;
+  }
+}
+

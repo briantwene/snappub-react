@@ -32,7 +32,7 @@ export type RawWallpaperContainer = {
 export interface Wallpaper {
   author: string;
   id: string;
-  avatar: string;
+  avatar: RedditorBasicInfo;
   src: string;
   thumb: string;
   title: string;

@@ -4,13 +4,13 @@ import axios from 'axios';
 import AccessDenied from '../../components/AccessDenied';
 import { useSession } from 'next-auth/react';
 
-import ImageRenderer from '../../components/ImageRenderer';
+import ImageRenderer from '../../components/ImageRenderer/ImageRenderer';
 import { useInfiniteQuery, useQuery } from '@tanstack/react-query';
 import * as RiIcons from 'react-icons/ri';
 import { useAppStore } from '../../utils/store';
 import Image from 'next/image';
 import { useInView } from 'react-intersection-observer';
-import InfiniteList from '../../components/InfiniteList';
+import InfiniteList from '../../components/InfiniteList/InfiniteList';
 import styles from './app.module.scss';
 // import React, { useEffect } from 'react';
 
@@ -100,10 +100,10 @@ function Home() {
         </h1>
       </section>
       {/* <Filter /> */}
-      <section className="photo_grid">
-        <InfiniteList />
-        <div></div>
-      </section>
+
+      <InfiniteList />
+      <div></div>
+
       {/* <div ref={ref} className={!hasNextPage ? 'hidden' : ''}>
         {isFetchingNextPage ? 'Loading more...' : ''}
       </div> */}
